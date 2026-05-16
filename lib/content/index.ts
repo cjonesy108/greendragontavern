@@ -1,9 +1,17 @@
 import declaration from './declaration'
 import constitution from './constitution'
 import billOfRights from './bill-of-rights'
+import federalist from './federalist'
+import farewell from './farewell'
 import type { DocumentData } from '../types'
 
-export const DOCUMENTS: DocumentData[] = [declaration, constitution, billOfRights]
+export const DOCUMENTS: DocumentData[] = [
+  declaration,
+  constitution,
+  billOfRights,
+  federalist,
+  farewell,
+]
 
 export function getDocument(slug: string): DocumentData | undefined {
   return DOCUMENTS.find((d) => d.slug === slug)
