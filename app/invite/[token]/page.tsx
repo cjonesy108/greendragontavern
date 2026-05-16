@@ -9,6 +9,8 @@ interface PageProps {
 export default async function InvitePage({ params }: PageProps) {
   const { token } = await params
 
+  if (!supabase) notFound()
+
   const { data: annotator } = await supabase
     .from('annotators')
     .select('id, name, slug, title, bio, is_featured')
