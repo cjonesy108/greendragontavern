@@ -64,6 +64,13 @@ body {
   font-size: 20px;
   color: var(--text-primary);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.site-logo img {
+  flex-shrink: 0;
 }
 
 .site-logo em {
