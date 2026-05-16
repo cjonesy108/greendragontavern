@@ -1,7 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import AnnotationPanel from './AnnotationPanel'
+import SelectionPopover from './SelectionPopover'
+import { selectionToPassageId } from '@/lib/utils'
 import type { DocumentData, AnnotationCounts } from '@/lib/types'
 
 interface Props {
@@ -12,11 +14,21 @@ interface Props {
 export default function DocumentViewer({ doc, initialCounts }: Props) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null)
+  const [selectedText, setSelectedText] = useState<string | null>(null)
   const [counts, setCounts] = useState<AnnotationCounts>(initialCounts)
+  const textColRef = useRef<HTMLDivElement>(null)
 
   function selectPassage(id: string, text: string) {
     setSelectedId(id)
     setSelectedLabel(text.length > 60 ? text.slice(0, 57) + '…' : text)
+    setSelectedText(null) // pre-defined passage, no free-form text
+  }
+
+  function selectFreeform(text: string) {
+    const id = selectionToPassageId(text)
+    setSelectedId(id)
+    setSelectedLabel(text.length > 60 ? text.slice(0, 57) + '…' : text)
+    setSelectedText(text)
   }
 
   function onAnnotationAdded(passageId: string) {
@@ -25,7 +37,7 @@ export default function DocumentViewer({ doc, initialCounts }: Props) {
 
   return (
     <div className="body-grid">
-      <div className="text-col">
+      <div className="text-col" ref={textColRef}>
         {doc.sections.map((section, si) => (
           <div key={si} className="passage-block">
             <div className="section-label">{section.label}</div>
@@ -52,10 +64,13 @@ export default function DocumentViewer({ doc, initialCounts }: Props) {
         ))}
       </div>
 
+      <SelectionPopover containerRef={textColRef} onAnnotate={selectFreeform} />
+
       <div className="panel-col">
         <AnnotationPanel
           passageId={selectedId}
           passageLabel={selectedLabel}
+          selectedText={selectedText}
           documentId={doc.id}
           onAnnotationAdded={onAnnotationAdded}
         />

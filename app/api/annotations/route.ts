@@ -69,6 +69,7 @@ export async function GET(req: NextRequest) {
     isFeatured: ann.annotators?.is_featured ?? false,
     frame: ann.frame,
     body: ann.body,
+    selectedText: ann.selected_text ?? null,
     voteCount: ann.vote_count,
     hasVoted: votedIds.has(ann.id),
     createdAt: ann.created_at,
@@ -82,7 +83,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null)
   if (!body) return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
 
-  const { passageId, documentId, annotatorName, frame, body: text, sessionId, inviteToken } = body
+  const { passageId, documentId, annotatorName, frame, body: text, sessionId, inviteToken, selectedText } = body
 
   if (!passageId || !documentId || !frame || !text?.trim()) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
@@ -116,6 +117,7 @@ export async function POST(req: NextRequest) {
       annotator_slug: annotatorSlug,
       frame,
       body: safeText,
+      selected_text: selectedText ? String(selectedText).slice(0, 1000) : null,
     })
     .select('id')
     .single()

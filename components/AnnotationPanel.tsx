@@ -26,11 +26,12 @@ function getSessionId(): string {
 interface Props {
   passageId: string | null
   passageLabel: string | null
+  selectedText: string | null
   documentId: string
   onAnnotationAdded?: (passageId: string) => void
 }
 
-export default function AnnotationPanel({ passageId, passageLabel, documentId, onAnnotationAdded }: Props) {
+export default function AnnotationPanel({ passageId, passageLabel, selectedText, documentId, onAnnotationAdded }: Props) {
   const [annotations, setAnnotations] = useState<Annotation[]>([])
   const [loading, setLoading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -85,6 +86,7 @@ export default function AnnotationPanel({ passageId, passageLabel, documentId, o
         frame,
         body: body.trim(),
         sessionId,
+        selectedText: selectedText ?? undefined,
       }),
     })
     if (res.ok) {
