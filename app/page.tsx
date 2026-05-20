@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { DOCUMENTS } from '@/lib/content'
 import { supabase } from '@/lib/supabase'
 
@@ -23,7 +24,20 @@ export default async function HomePage() {
 
   return (
     <main>
-      {/* ── Hero ── */}
+      {/* ── Painting Hero ── */}
+      <div className="landing-painting-wrap">
+        <Image
+          src="/trumbull.jpg"
+          alt="Declaration of Independence (1819) by John Trumbull"
+          fill
+          className="landing-painting-img"
+          priority
+          sizes="100vw"
+        />
+        <div className="landing-painting-fade" />
+      </div>
+
+      {/* ── Hero Text ── */}
       <section className="landing-hero">
         <div className="landing-eyebrow">Boston &middot; est. 1654</div>
 
@@ -47,6 +61,10 @@ export default async function HomePage() {
         <a href="#documents" className="landing-cta">
           Enter the tavern →
         </a>
+
+        <div className="landing-painting-credit">
+          <em>Declaration of Independence</em> (1819), John Trumbull · Public domain
+        </div>
       </section>
 
       {/* ── Canon ── */}

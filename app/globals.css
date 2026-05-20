@@ -90,9 +90,33 @@ body {
 
 /* ─── Landing Page ─── */
 
+.landing-painting-wrap {
+  position: relative;
+  width: 100%;
+  height: 62vh;
+  min-height: 320px;
+  max-height: 600px;
+  overflow: hidden;
+}
+
+.landing-painting-img {
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.landing-painting-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+}
+
 .landing-hero {
   text-align: center;
-  padding: 7rem 2rem 5rem;
+  padding: 1.5rem 2rem 4rem;
   max-width: 720px;
   margin: 0 auto;
 }
@@ -153,6 +177,14 @@ body {
 }
 
 .landing-cta:hover { background: var(--amber-dark); }
+
+.landing-painting-credit {
+  margin-top: 1.5rem;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
 
 /* ─── Canon Section ─── */
 
@@ -354,7 +386,9 @@ body {
   .site-logo em { display: none; }
 
   /* Landing */
-  .landing-hero { padding: 4rem 1.25rem 3rem; }
+  .landing-painting-wrap { height: 48vw; min-height: 220px; max-height: 380px; }
+  .landing-painting-fade { height: 65%; }
+  .landing-hero { padding: 0.5rem 1.25rem 3rem; }
   .landing-h1 { font-size: 38px; }
   .landing-sub { font-size: 15px; }
   .landing-canon { padding: 1rem 1.25rem 3rem; }
