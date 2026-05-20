@@ -24,46 +24,47 @@ export default async function HomePage() {
 
   return (
     <main>
-      {/* ── Painting Hero ── */}
-      <div className="landing-painting-wrap">
-        <Image
-          src="/trumbull.jpg"
-          alt="Declaration of Independence (1819) by John Trumbull"
-          fill
-          className="landing-painting-img"
-          priority
-          sizes="100vw"
-        />
-        <div className="landing-painting-fade" />
-      </div>
-
-      {/* ── Hero Text ── */}
+      {/* ── Full-viewport painting hero with text overlaid ── */}
       <section className="landing-hero">
-        <div className="landing-eyebrow">Boston &middot; est. 1654</div>
+        <div className="landing-painting-wrap">
+          <Image
+            src="/trumbull.jpg"
+            alt="Declaration of Independence (1819) by John Trumbull"
+            fill
+            className="landing-painting-img"
+            priority
+            sizes="100vw"
+          />
+          <div className="landing-painting-fade" />
+        </div>
 
-        <h1 className="landing-h1">
-          The documents<br />that made us.
-        </h1>
+        <div className="landing-hero-content">
+          <div className="landing-eyebrow">Boston &middot; est. 1654</div>
 
-        <div className="landing-ornament">✦</div>
+          <h1 className="landing-h1">
+            The documents<br />that made us.
+          </h1>
 
-        <p className="landing-sub">
-          The Declaration. The Constitution. The Bill of Rights.<br />
-          Read them, argue over them, keep them alive &mdash; as their authors intended.
-        </p>
+          <div className="landing-ornament">✦</div>
 
-        {total > 0 && (
-          <div className="landing-stat">
-            {total.toLocaleString()} annotation{total !== 1 ? 's' : ''} and counting.
+          <p className="landing-sub">
+            The Declaration. The Constitution. The Bill of Rights.<br />
+            Read them, argue over them, keep them alive &mdash; as their authors intended.
+          </p>
+
+          {total > 0 && (
+            <div className="landing-stat">
+              {total.toLocaleString()} annotation{total !== 1 ? 's' : ''} and counting.
+            </div>
+          )}
+
+          <a href="#documents" className="landing-cta">
+            Enter the tavern →
+          </a>
+
+          <div className="landing-painting-credit">
+            <em>Declaration of Independence</em> (1819), John Trumbull &middot; Public domain
           </div>
-        )}
-
-        <a href="#documents" className="landing-cta">
-          Enter the tavern →
-        </a>
-
-        <div className="landing-painting-credit">
-          <em>Declaration of Independence</em> (1819), John Trumbull · Public domain
         </div>
       </section>
 
