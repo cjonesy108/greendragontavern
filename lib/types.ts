@@ -41,7 +41,19 @@ export interface Annotation {
   selectedText: string | null;
   voteCount: number;
   hasVoted: boolean;
+  replyCount: number;
   createdAt: string;
 }
 
 export type AnnotationCounts = Record<string, number>;
+
+export interface Reply {
+  id: string
+  annotationId: string
+  authorName: string
+  authorSlug: string | null
+  body: string
+  voteCount: number
+  hasVoted: boolean
+  createdAt: string
+}

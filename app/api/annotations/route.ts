@@ -48,8 +48,9 @@ export async function GET(req: NextRequest) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
-  // Fetch which ones this session has voted on
   const ids = (anns ?? []).map((a) => a.id)
+
+  // Fetch which ones this session has voted on
   let votedIds: Set<string> = new Set()
   if (ids.length > 0 && sessionId) {
     const { data: votes } = await supabase
@@ -58,6 +59,18 @@ export async function GET(req: NextRequest) {
       .in('annotation_id', ids)
       .eq('session_id', sessionId)
     for (const v of votes ?? []) votedIds.add(v.annotation_id)
+  }
+
+  // Fetch reply counts per annotation
+  const replyCounts: Record<string, number> = {}
+  if (ids.length > 0) {
+    const { data: counts } = await supabase
+      .from('replies')
+      .select('annotation_id')
+      .in('annotation_id', ids)
+    for (const r of counts ?? []) {
+      replyCounts[r.annotation_id] = (replyCounts[r.annotation_id] || 0) + 1
+    }
   }
 
   const result = (anns ?? []).map((ann) => ({
@@ -72,6 +85,7 @@ export async function GET(req: NextRequest) {
     selectedText: ann.selected_text ?? null,
     voteCount: ann.vote_count,
     hasVoted: votedIds.has(ann.id),
+    replyCount: replyCounts[ann.id] || 0,
     createdAt: ann.created_at,
   }))
 

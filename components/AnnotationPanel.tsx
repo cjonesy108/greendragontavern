@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import type { Annotation, FrameType } from '@/lib/types'
 import { nameToSlug } from '@/lib/utils'
+import ReplyThread from './ReplyThread'
 
 const FRAME_LABELS: Record<FrameType, string> = {
   historical: 'Historical context',
@@ -165,6 +166,7 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
                 {ann.hasVoted ? '✓' : '+'} {ann.voteCount}
               </button>
             </div>
+            <ReplyThread annotationId={ann.id} initialCount={ann.replyCount} />
           </div>
         ))}
       </div>

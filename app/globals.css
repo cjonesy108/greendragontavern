@@ -630,6 +630,137 @@ body {
 .vote-btn:hover { border-color: var(--border-mid); color: var(--text-secondary); }
 .vote-btn.voted { border-color: var(--amber); color: var(--amber); }
 
+/* ─── Reply Threads ─── */
+
+.reply-thread {
+  margin-top: 8px;
+  border-top: 0.5px solid var(--border);
+  padding-top: 6px;
+}
+
+.reply-toggle {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  padding: 0;
+  transition: color 0.1s;
+}
+
+.reply-toggle:hover { color: var(--amber); }
+
+.reply-body {
+  margin-top: 8px;
+  padding-left: 10px;
+  border-left: 2px solid var(--border);
+}
+
+.reply-item {
+  padding: 7px 0;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.reply-item:last-of-type { border-bottom: none; }
+
+.reply-text {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.reply-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reply-meta a {
+  color: var(--text-tertiary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--border-mid);
+}
+
+.reply-meta a:hover { color: var(--amber); }
+
+.reply-vote-btn {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  background: none;
+  border: 0.5px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 6px;
+  cursor: pointer;
+  font-family: 'Spectral', serif;
+  font-style: normal;
+  transition: all 0.1s;
+}
+
+.reply-vote-btn:hover { border-color: var(--border-mid); color: var(--text-secondary); }
+.reply-vote-btn.voted { border-color: var(--amber); color: var(--amber); }
+
+.reply-loading,
+.reply-empty {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  padding: 6px 0;
+}
+
+.reply-form {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reply-input,
+.reply-textarea {
+  width: 100%;
+  font-family: 'Spectral', serif;
+  font-size: 12px;
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 6px 9px;
+  outline: none;
+  transition: border-color 0.15s;
+  appearance: none;
+}
+
+.reply-input:focus,
+.reply-textarea:focus { border-color: var(--amber); }
+
+.reply-textarea {
+  resize: vertical;
+  min-height: 60px;
+  line-height: 1.55;
+}
+
+.reply-submit {
+  font-family: 'Spectral', serif;
+  font-size: 12px;
+  padding: 5px 12px;
+  cursor: pointer;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: all 0.15s;
+  align-self: flex-start;
+}
+
+.reply-submit:hover { border-color: var(--amber); color: var(--amber); }
+.reply-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
 /* ─── Add Annotation Form ─── */
 
 .add-form {
