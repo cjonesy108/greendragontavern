@@ -142,6 +142,9 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
         {!loading && sortedAnnotations.map((ann) => (
           <div key={ann.id} className="ann-item">
             <div className={`ann-frame frame-${ann.frame}`}>{FRAME_LABELS[ann.frame]}</div>
+            {ann.selectedText && (
+              <blockquote className="ann-quote">&ldquo;{ann.selectedText}&rdquo;</blockquote>
+            )}
             <div className="ann-text">{ann.body}</div>
             <div className="ann-author">
               —{' '}

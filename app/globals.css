@@ -356,6 +356,17 @@ body {
   .frame-contest { background: #501313; color: #F09595; }
 }
 
+.ann-quote {
+  font-family: 'IM Fell English', 'Georgia', serif;
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text-tertiary);
+  border-left: 2px solid var(--amber);
+  margin: 0 0 8px 0;
+  padding: 2px 0 2px 10px;
+  line-height: 1.55;
+}
+
 .ann-text {
   font-size: 13px;
   line-height: 1.65;

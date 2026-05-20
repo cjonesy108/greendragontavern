@@ -38,6 +38,7 @@ export interface Annotation {
   isFeatured: boolean;
   frame: FrameType;
   body: string;
+  selectedText: string | null;
   voteCount: number;
   hasVoted: boolean;
   createdAt: string;
