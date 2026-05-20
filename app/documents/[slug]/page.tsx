@@ -16,7 +16,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params
   const doc = getDocument(slug)
   if (!doc) return {}
-  return { title: `${doc.title} — The Green Dragon Tavern` }
+  const description = `Read and annotate ${doc.title} — ${doc.subtitle}. ${doc.dateDescription}. Join the debate at The Green Dragon Tavern.`
+  return {
+    title: doc.title,
+    description,
+    openGraph: {
+      title: `${doc.title} — The Green Dragon Tavern`,
+      description,
+      url: `https://greendragontavern.ai/documents/${slug}`,
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${doc.title} — The Green Dragon Tavern`,
+      description,
+    },
+  }
 }
 
 async function getAnnotationCounts(documentId: string): Promise<AnnotationCounts> {
