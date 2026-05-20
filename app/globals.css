@@ -163,6 +163,13 @@ body {
   font-style: normal;
 }
 
+.doc-card-count {
+  font-size: 11px;
+  color: var(--amber);
+  margin-top: 0.6rem;
+  letter-spacing: 0.03em;
+}
+
 /* ─── Document Nav ─── */
 
 .doc-nav {
