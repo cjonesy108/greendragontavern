@@ -243,8 +243,58 @@ body {
 }
 
 @media (max-width: 768px) {
-  .body-grid { grid-template-columns: 1fr; }
-  .panel-col { position: static !important; }
+  /* Layout */
+  .body-grid { grid-template-columns: 1fr; gap: 0; }
+  .panel-col { position: static !important; margin-top: 0; }
+
+  /* Header */
+  .site-header { padding: 0.75rem 1rem; }
+  .site-tagline { display: none; }
+  .site-logo { font-size: 17px; gap: 8px; }
+  .site-logo em { display: none; }
+
+  /* Home */
+  .home-hero { padding: 2rem 1.25rem 1.5rem; }
+  .home-hero h1 { font-size: 26px; }
+  .home-hero p { font-size: 15px; }
+  .home-documents { padding: 0 1.25rem; margin-top: 1.5rem; margin-bottom: 3rem; }
+
+  /* Document nav */
+  .doc-nav-inner { padding: 0 0.5rem; }
+  .doc-nav-link { padding: 0.65rem 0.75rem; font-size: 12px; }
+
+  /* Document page */
+  .main { padding: 1.5rem 1rem 3rem; }
+  .doc-title { font-size: 22px; }
+  .doc-meta { font-size: 13px; }
+  .doc-hint { font-size: 12px; padding: 3px 12px; }
+  .doc-header { margin-bottom: 1.5rem; }
+
+  /* Text */
+  .passage { font-size: 15px; line-height: 1.85; }
+  .passage-block { margin-bottom: 1.5rem; }
+
+  /* Panel */
+  .panel {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: 2px solid var(--amber);
+    scroll-margin-top: 60px;
+  }
+
+  /* Form — bigger touch targets */
+  .add-form select,
+  .add-form textarea,
+  .add-form input[type="text"] {
+    font-size: 16px; /* prevents iOS zoom */
+    padding: 9px 12px;
+  }
+  .add-form textarea { min-height: 100px; }
+  .submit-btn { padding: 11px 16px; font-size: 14px; }
+
+  /* Footer */
+  footer { font-size: 11px; padding: 1.25rem 1rem; }
 }
 
 /* ─── Document Text ─── */

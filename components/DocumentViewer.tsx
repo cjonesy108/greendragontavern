@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import AnnotationPanel from './AnnotationPanel'
 import SelectionPopover from './SelectionPopover'
 import { selectionToPassageId } from '@/lib/utils'
@@ -34,6 +34,15 @@ export default function DocumentViewer({ doc, initialCounts }: Props) {
   function onAnnotationAdded(passageId: string) {
     setCounts((prev) => ({ ...prev, [passageId]: (prev[passageId] || 0) + 1 }))
   }
+
+  // On mobile, scroll to the panel whenever a passage is selected
+  useEffect(() => {
+    if (!selectedId) return
+    if (typeof window === 'undefined' || window.innerWidth >= 768) return
+    setTimeout(() => {
+      document.getElementById('main-panel')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 50)
+  }, [selectedId])
 
   return (
     <div className="body-grid">
