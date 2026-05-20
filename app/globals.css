@@ -88,86 +88,186 @@ body {
   letter-spacing: 0.04em;
 }
 
-/* ─── Home Page ─── */
+/* ─── Landing Page ─── */
 
-.home-hero {
+.landing-hero {
+  text-align: center;
+  padding: 7rem 2rem 5rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.landing-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 2.5rem;
+  font-family: 'Spectral', serif;
+}
+
+.landing-h1 {
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 62px;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  margin-bottom: 0;
+}
+
+.landing-ornament {
+  font-size: 18px;
+  color: var(--amber);
+  margin: 1.75rem auto;
+  letter-spacing: 0.1em;
+}
+
+.landing-sub {
+  font-family: 'Spectral', serif;
+  font-size: 17px;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 0 auto 1.5rem;
+}
+
+.landing-stat {
+  font-size: 12px;
+  color: var(--amber);
+  letter-spacing: 0.06em;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.landing-cta {
+  display: inline-block;
+  font-family: 'Spectral', serif;
+  font-size: 14px;
+  color: white;
+  background: var(--amber);
+  border-radius: var(--radius-md);
+  padding: 10px 24px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.15s;
+}
+
+.landing-cta:hover { background: var(--amber-dark); }
+
+/* ─── Canon Section ─── */
+
+.landing-canon {
   max-width: 680px;
   margin: 0 auto;
-  padding: 4rem 2rem 2rem;
+  padding: 2rem 2rem 4rem;
+}
+
+.landing-canon-header {
   text-align: center;
+  margin-bottom: 2.5rem;
 }
 
-.home-hero h1 {
+.landing-canon-label {
   font-family: 'IM Fell English', Georgia, serif;
-  font-size: 36px;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
   margin-bottom: 1rem;
-  letter-spacing: 0.01em;
-  line-height: 1.25;
 }
 
-.home-hero p {
-  font-size: 16px;
-  color: var(--text-secondary);
-  font-style: italic;
-  line-height: 1.8;
-  margin-bottom: 0.5rem;
+.landing-canon-rule {
+  height: 0.5px;
+  background: var(--border);
+  max-width: 200px;
+  margin: 0 auto;
 }
 
-.home-documents {
-  max-width: 760px;
-  margin: 3rem auto 5rem;
-  padding: 0 2rem;
+.landing-doc-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 }
 
-.doc-card {
-  display: block;
-  border: 0.5px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--bg-panel);
-  padding: 1.4rem 1.6rem;
+.landing-doc-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 1.1rem 0.5rem;
+  border-bottom: 0.5px solid var(--border);
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: background 0.12s;
+  border-radius: var(--radius-md);
 }
 
-.doc-card:hover {
-  border-color: var(--amber);
-  box-shadow: 0 2px 12px rgba(186, 117, 23, 0.08);
+.landing-doc-row:last-child { border-bottom: none; }
+
+.landing-doc-row:hover {
+  background: var(--bg-secondary);
+  padding-left: 1rem;
 }
 
-.doc-card-title {
+.landing-doc-numeral {
   font-family: 'IM Fell English', Georgia, serif;
-  font-size: 20px;
+  font-size: 13px;
+  color: var(--amber);
+  width: 24px;
+  flex-shrink: 0;
+  text-align: right;
+  font-style: italic;
+}
+
+.landing-doc-info { flex: 1; min-width: 0; }
+
+.landing-doc-title {
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 21px;
+  line-height: 1.2;
   margin-bottom: 0.25rem;
 }
 
-.doc-card-meta {
+.landing-doc-meta {
   font-size: 12px;
   color: var(--text-tertiary);
   font-style: italic;
-  margin-bottom: 0.6rem;
 }
 
-.doc-card-desc {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.65;
-}
-
-.doc-card-arrow {
+.landing-doc-count {
   color: var(--amber);
-  margin-left: 4px;
   font-style: normal;
 }
 
-.doc-card-count {
-  font-size: 11px;
+.landing-doc-arrow {
   color: var(--amber);
-  margin-top: 0.6rem;
-  letter-spacing: 0.03em;
+  font-size: 16px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+
+.landing-doc-row:hover .landing-doc-arrow { opacity: 1; }
+
+/* ─── Mission ─── */
+
+.landing-mission {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 2rem 6rem;
+  text-align: center;
+}
+
+.landing-mission-rule {
+  height: 0.5px;
+  background: var(--border);
+  margin-bottom: 2.5rem;
+}
+
+.landing-mission p {
+  font-family: 'Spectral', serif;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--text-tertiary);
+  line-height: 1.85;
 }
 
 /* ─── Document Nav ─── */
@@ -253,11 +353,14 @@ body {
   .site-logo { font-size: 17px; gap: 8px; }
   .site-logo em { display: none; }
 
-  /* Home */
-  .home-hero { padding: 2rem 1.25rem 1.5rem; }
-  .home-hero h1 { font-size: 26px; }
-  .home-hero p { font-size: 15px; }
-  .home-documents { padding: 0 1.25rem; margin-top: 1.5rem; margin-bottom: 3rem; }
+  /* Landing */
+  .landing-hero { padding: 4rem 1.25rem 3rem; }
+  .landing-h1 { font-size: 38px; }
+  .landing-sub { font-size: 15px; }
+  .landing-canon { padding: 1rem 1.25rem 3rem; }
+  .landing-mission { padding: 0 1.25rem 4rem; }
+  .landing-doc-title { font-size: 18px; }
+  .landing-doc-row:hover { padding-left: 0.5rem; }
 
   /* Document nav */
   .doc-nav-inner { padding: 0 0.5rem; }

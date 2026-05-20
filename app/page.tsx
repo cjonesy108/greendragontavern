@@ -4,6 +4,8 @@ import { supabase } from '@/lib/supabase'
 
 export const dynamic = 'force-dynamic'
 
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+
 async function getDocumentCounts(): Promise<Record<string, number>> {
   if (!supabase) return {}
   const { data } = await supabase.from('annotations').select('document_id')
@@ -17,38 +19,76 @@ async function getDocumentCounts(): Promise<Record<string, number>> {
 
 export default async function HomePage() {
   const counts = await getDocumentCounts()
+  const total = Object.values(counts).reduce((a, b) => a + b, 0)
 
   return (
     <main>
-      <section className="home-hero">
-        <h1>America&rsquo;s founding documents,<br />annotated by Americans.</h1>
-        <p>
-          The Declaration, the Constitution, the Bill of Rights — read as their authors intended
-          them to be read: debated, contested, and kept alive by each generation.
+      {/* ── Hero ── */}
+      <section className="landing-hero">
+        <div className="landing-eyebrow">Boston &middot; est. 1654</div>
+
+        <h1 className="landing-h1">
+          The documents<br />that made us.
+        </h1>
+
+        <div className="landing-ornament">✦</div>
+
+        <p className="landing-sub">
+          The Declaration. The Constitution. The Bill of Rights.<br />
+          Read them, argue over them, keep them alive &mdash; as their authors intended.
         </p>
-        <p style={{ marginTop: '0.5rem', fontSize: '13px' }}>
-          Select a document to begin.
-        </p>
+
+        {total > 0 && (
+          <div className="landing-stat">
+            {total.toLocaleString()} annotation{total !== 1 ? 's' : ''} and counting.
+          </div>
+        )}
+
+        <a href="#documents" className="landing-cta">
+          Enter the tavern →
+        </a>
       </section>
 
-      <section className="home-documents">
-        {DOCUMENTS.map((doc) => {
-          const count = counts[doc.id] || 0
-          return (
-            <Link key={doc.id} href={`/documents/${doc.slug}`} className="doc-card">
-              <div className="doc-card-title">
-                {doc.title} <span className="doc-card-arrow">→</span>
-              </div>
-              <div className="doc-card-meta">{doc.dateDescription}</div>
-              <div className="doc-card-desc">{doc.description}</div>
-              {count > 0 && (
-                <div className="doc-card-count">
-                  {count} annotation{count !== 1 ? 's' : ''}
+      {/* ── Canon ── */}
+      <section className="landing-canon" id="documents">
+        <div className="landing-canon-header">
+          <div className="landing-canon-label">The Canon</div>
+          <div className="landing-canon-rule" />
+        </div>
+
+        <div className="landing-doc-list">
+          {DOCUMENTS.map((doc, i) => {
+            const count = counts[doc.id] || 0
+            return (
+              <Link key={doc.id} href={`/documents/${doc.slug}`} className="landing-doc-row">
+                <div className="landing-doc-numeral">{ROMAN[i]}</div>
+                <div className="landing-doc-info">
+                  <div className="landing-doc-title">{doc.title}</div>
+                  <div className="landing-doc-meta">
+                    {doc.dateDescription}
+                    {count > 0 && (
+                      <span className="landing-doc-count">
+                        &nbsp;&middot;&nbsp;{count} annotation{count !== 1 ? 's' : ''}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              )}
-            </Link>
-          )
-        })}
+                <div className="landing-doc-arrow">→</div>
+              </Link>
+            )
+          })}
+        </div>
+      </section>
+
+      {/* ── Mission ── */}
+      <section className="landing-mission">
+        <div className="landing-mission-rule" />
+        <p>
+          The original Green Dragon Tavern was where Boston&rsquo;s patriots gathered to argue
+          about liberty &mdash; where the Sons of Liberty met, where the Tea Party was planned,
+          where the Revolution took shape in argument and debate. This is where we continue
+          that argument. Every generation must read these words for itself.
+        </p>
       </section>
     </main>
   )
