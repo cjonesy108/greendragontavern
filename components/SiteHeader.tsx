@@ -16,6 +16,9 @@ export default function SiteHeader() {
           The Green Dragon Tavern <em>— where Americans still argue</em>
         </span>
       </Link>
+      <nav className="site-nav">
+        <Link href="/floor" className="site-nav-link">The Floor</Link>
+      </nav>
       <div className="site-tagline">greendragontavern.ai</div>
     </header>
   )

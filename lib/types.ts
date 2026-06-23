@@ -46,6 +46,28 @@ export interface Annotation {
 }
 
 export type AnnotationCounts = Record<string, number>;
+
+export interface FloorPost {
+  id: string
+  title: string
+  body: string
+  authorName: string
+  authorSlug: string | null
+  voteCount: number
+  replyCount: number
+  hasVoted: boolean
+  createdAt: string
+}
+
+export interface FloorReply {
+  id: string
+  postId: string
+  authorName: string
+  body: string
+  voteCount: number
+  hasVoted: boolean
+  createdAt: string
+}
 export type ContestedPassages = Record<string, boolean>;
 
 export interface Reply {

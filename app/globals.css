@@ -900,6 +900,300 @@ body {
   font-style: italic;
 }
 
+/* ─── Site Nav ─── */
+
+.site-nav { display: flex; align-items: center; gap: 0.5rem; }
+
+.site-nav-link {
+  font-size: 13px;
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 4px 10px;
+  border: 0.5px solid var(--border);
+  border-radius: 20px;
+  transition: color 0.1s, border-color 0.1s;
+}
+
+.site-nav-link:hover { color: var(--amber); border-color: var(--amber); }
+
+/* ─── Tavern Floor ─── */
+
+.floor-main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+
+.floor-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.floor-title {
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 28px;
+  margin-bottom: 0.5rem;
+}
+
+.floor-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.floor-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.floor-sort { display: flex; gap: 4px; }
+
+.floor-sort-btn {
+  font-family: 'Spectral', serif;
+  font-size: 12px;
+  padding: 4px 12px;
+  border: 0.5px solid var(--border);
+  border-radius: 20px;
+  background: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.floor-sort-btn.active,
+.floor-sort-btn:hover { border-color: var(--amber); color: var(--amber); }
+
+.floor-new-btn {
+  font-family: 'Spectral', serif;
+  font-size: 13px;
+  padding: 6px 16px;
+  background: var(--amber);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.floor-new-btn:hover { background: var(--amber-dark); }
+
+.floor-new-form {
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-panel);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.floor-title-input {
+  width: 100%;
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 18px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 9px 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.floor-title-input:focus { border-color: var(--amber); }
+
+.floor-body-input {
+  width: 100%;
+  font-family: 'Spectral', serif;
+  font-size: 14px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 9px 12px;
+  outline: none;
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.65;
+  transition: border-color 0.15s;
+}
+
+.floor-body-input:focus { border-color: var(--amber); }
+
+.floor-form-footer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.floor-name-input {
+  flex: 1;
+  font-family: 'Spectral', serif;
+  font-size: 13px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 7px 10px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.floor-name-input:focus { border-color: var(--amber); }
+
+.floor-post {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.floor-post:last-child { border-bottom: none; }
+
+.floor-post-vote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  width: 32px;
+  padding-top: 2px;
+}
+
+.floor-vote-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px;
+  transition: color 0.1s;
+}
+
+.floor-vote-btn:hover { color: var(--amber); }
+.floor-vote-btn.voted { color: var(--amber); }
+
+.floor-vote-count {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-family: 'Spectral', serif;
+}
+
+.floor-post-body { flex: 1; min-width: 0; }
+
+.floor-post-title {
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: color 0.1s;
+}
+
+.floor-post-title:hover { color: var(--amber); }
+
+.floor-post-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+.floor-post-meta a {
+  color: var(--text-tertiary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.floor-post-meta a:hover { color: var(--amber); }
+
+.floor-post-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 10px 0;
+  white-space: pre-wrap;
+}
+
+.floor-reply-toggle {
+  font-size: 11px;
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  color: var(--text-tertiary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.1s;
+}
+
+.floor-reply-toggle:hover { color: var(--amber); }
+
+.floor-replies {
+  margin-top: 10px;
+  padding-left: 12px;
+  border-left: 2px solid var(--border);
+}
+
+.floor-reply-item {
+  padding: 8px 0;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.floor-reply-item:last-of-type { border-bottom: none; }
+
+.floor-reply-text {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.floor-reply-meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.floor-reply-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.floor-reply-empty {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  padding: 8px 0;
+}
+
+.floor-empty {
+  text-align: center;
+  padding: 3rem 0;
+  font-style: italic;
+  color: var(--text-tertiary);
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .floor-main { padding: 1.5rem 1.25rem 4rem; }
+  .floor-form-footer { flex-direction: column; align-items: stretch; }
+  .site-nav-link { font-size: 12px; padding: 3px 8px; }
+}
+
 /* ─── Annotator Profile ─── */
 
 .profile-main {
