@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Dragon Tavern — The Declaration of Independence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf7f2;
+      --bg-panel: #ffffff;
+      --bg-secondary: #f3efe8;
+      --text-primary: #1a1a18;
+      --text-secondary: #5c5a54;
+      --text-tertiary: #9a9890;
+      --border: rgba(0,0,0,0.12);
+      --border-mid: rgba(0,0,0,0.2);
+      --amber: #BA7517;
+      --amber-light: #faeeda;
+      --amber-mid: #fac775;
+      --amber-dark: #854F0B;
+      --radius-md: 6px;
+      --radius-lg: 10px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1917;
+        --bg-panel: #222220;
+        --bg-secondary: #2a2926;
+        --text-primary: #f0ede6;
+        --text-secondary: #a8a49c;
+        --text-tertiary: #6a6760;
+        --border: rgba(255,255,255,0.1);
+        --border-mid: rgba(255,255,255,0.18);
+        --amber-light: #2d1f06;
+        --amber-mid: #4a2e08;
+      }
+    }
+
+    body {
+      font-family: 'Spectral', Georgia, serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    .site-header {
+      border-bottom: 0.5px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-panel);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .site-logo {
+      font-family: 'IM Fell English', Georgia, serif;
+      font-size: 20px;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .site-logo em {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-left: 10px;
+      font-style: italic;
+      font-family: 'Spectral', serif;
+    }
+
+    .site-tagline {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-style: italic;
+      letter-spacing: 0.04em;
+    }
+
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+    }
+
+    .doc-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .doc-title {
+      font-family: 'IM Fell English', Georgia, serif;
+      font-size: 28px;
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+
+    .doc-meta {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .doc-hint {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      border: 0.5px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 14px;
+    }
+
+    .body-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      .body-grid { grid-template-columns: 1fr; }
+      .panel-col { position: static !important; }
+    }
+
+    .text-col {}
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+
+    .passage-block {
+      margin-bottom: 2rem;
+    }
+
+    .passage {
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--text-primary);
+    }
+
+    .annotatable {
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.15s;
+    }
+
+    .annotatable:hover { background: var(--amber-light); }
+    .annotatable.active { background: var(--amber-mid); }
+
+    .annotatable.has-annotations {
+      border-bottom: 1.5px solid var(--amber);
+    }
+
+    .ann-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      background: var(--amber);
+      color: white;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 500;
+      vertical-align: super;
+      margin-left: 2px;
+      position: relative;
+      top: -2px;
+      font-family: 'Spectral', serif;
+    }
+
+    .panel-col {
+      position: sticky;
+      top: 80px;
+    }
+
+    .panel {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-panel);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 0.85rem 1.1rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .panel-header strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 2px;
+      font-style: normal;
+    }
+
+    .panel-header span {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .ann-list {}
+
+    .ann-item {
+      padding: 0.85rem 1.1rem;
+      border-bottom: 0.5px solid var(--border);
+      transition: background 0.1s;
+    }
+
+    .ann-item:last-child { border-bottom: none; }
+    .ann-item:hover { background: var(--bg-secondary); }
+
+    .ann-frame {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 3px;
+      margin-bottom: 7px;
+      font-weight: 500;
+    }
+
+    .frame-historical { background: #E6F1FB; color: #0C447C; }
+    .frame-legal { background: #EAF3DE; color: #27500A; }
+    .frame-contemporary { background: #FAEEDA; color: #633806; }
+    .frame-personal { background: #EEEDFE; color: #3C3489; }
+    .frame-contest { background: #FCEBEB; color: #791F1F; }
+
+    @media (prefers-color-scheme: dark) {
+      .frame-historical { background: #042C53; color: #85B7EB; }
+      .frame-legal { background: #173404; color: #97C459; }
+      .frame-contemporary { background: #412402; color: #EF9F27; }
+      .frame-personal { background: #26215C; color: #AFA9EC; }
+      .frame-contest { background: #501313; color: #F09595; }
+    }
+
+    .ann-text {
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .ann-author {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-style: italic;
+    }
+
+    .ann-votes {
+      margin-top: 7px;
+    }
+
+    .vote-btn {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      background: none;
+      border: 0.5px solid var(--border);
+      border-radius: 3px;
+      padding: 2px 8px;
+      cursor: pointer;
+      font-family: 'Spectral', serif;
+      transition: all 0.1s;
+    }
+
+    .vote-btn:hover { border-color: var(--border-mid); color: var(--text-secondary); }
+    .vote-btn.voted { border-color: var(--amber); color: var(--amber); }
+
+    .add-form {
+      padding: 0.85rem 1.1rem;
+      border-top: 0.5px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .add-form label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .add-form select,
+    .add-form textarea,
+    .add-form input[type="text"] {
+      width: 100%;
+      font-family: 'Spectral', serif;
+      font-size: 13px;
+      background: var(--bg-panel);
+      color: var(--text-primary);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 7px 10px;
+      margin-bottom: 10px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .add-form select:focus,
+    .add-form textarea:focus,
+    .add-form input[type="text"]:focus {
+      border-color: var(--amber);
+    }
+
+    .add-form textarea {
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.6;
+    }
+
+    .submit-btn {
+      font-family: 'Spectral', serif;
+      font-size: 13px;
+      padding: 7px 16px;
+      cursor: pointer;
+      background: var(--amber);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      transition: background 0.15s;
+      width: 100%;
+    }
+
+    .submit-btn:hover { background: var(--amber-dark); }
+
+    .empty-state {
+      padding: 2rem 1.1rem;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    .default-state {
+      padding: 2rem 1.1rem;
+      text-align: center;
+    }
+
+    .default-state p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    .divider {
+      height: 0.5px;
+      background: var(--border);
+      margin: 2rem 0;
+    }
+
+    footer {
+      border-top: 0.5px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-logo" href="#">The Green Dragon Tavern <em>— where Americans still argue</em></a>
+  <div class="site-tagline">greendragontavern.ai</div>
+</header>
+
+<main class="main">
+  <div class="doc-header">
+    <div class="doc-title">The Declaration of Independence</div>
+    <div class="doc-meta">In Congress, July 4, 1776</div>
+    <div class="doc-hint">Click any underlined passage to read and add annotations</div>
+  </div>
+
+  <div class="body-grid">
+    <div class="text-col">
+
+      <div class="passage-block">
+        <div class="section-label">Preamble</div>
+        <p class="passage">
+          When in the Course of human events, it becomes necessary for one people to dissolve the political bands which have connected them with another, and to assume among the powers of the earth, <span class="annotatable has-annotations" data-id="separate-equal" onclick="selectPassage(this)">the separate and equal station to which the Laws of Nature and of Nature's God entitle them<span class="ann-count">3</span></span>, a decent respect to the opinions of mankind requires that they should declare the causes which impel them to the separation.
+        </p>
+      </div>
+
+      <div class="passage-block">
+        <div class="section-label">Self-evident truths</div>
+        <p class="passage">
+          We hold these truths to be self-evident, <span class="annotatable has-annotations" data-id="all-men-equal" onclick="selectPassage(this)">that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness<span class="ann-count">5</span></span>. — That to secure these rights, Governments are instituted among Men, <span class="annotatable has-annotations" data-id="consent" onclick="selectPassage(this)">deriving their just powers from the consent of the governed<span class="ann-count">2</span></span>, — That whenever any Form of Government becomes destructive of these ends, <span class="annotatable" data-id="alter-abolish" onclick="selectPassage(this)">it is the Right of the People to alter or to abolish it, and to institute new Government</span>, laying its foundation on such principles and organizing its powers in such form, as to them shall seem most likely to effect their Safety and Happiness.
+        </p>
+      </div>
+
+      <div class="passage-block">
+        <div class="section-label">On prudence</div>
+        <p class="passage">
+          Prudence, indeed, will dictate that <span class="annotatable has-annotations" data-id="long-train" onclick="selectPassage(this)">Governments long established should not be changed for light and transient causes; and accordingly all experience hath shewn, that mankind are more disposed to suffer, while evils are sufferable, than to right themselves by abolishing the forms to which they are accustomed<span class="ann-count">1</span></span>. But when a long train of abuses and usurpations, pursuing invariably the same Object evinces a design to reduce them under absolute Despotism, it is their right, it is their duty, to throw off such Government, and to provide new Guards for their future security.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="panel-col">
+      <div class="panel" id="main-panel">
+        <div class="panel-header" id="panel-header">
+          <strong>The tavern floor</strong>
+          <span>Select a passage to open the debate</span>
+        </div>
+        <div id="panel-body">
+          <div class="default-state">
+            <p>Click any underlined passage in the text to read annotations and add your voice to the debate.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  The Green Dragon Tavern — Boston, MA, est. 1654. &nbsp;·&nbsp; greendragontavern.ai &nbsp;·&nbsp; Where Americans still argue.
+</footer>
+
+<script>
+  const ANNOTATIONS = {
+    'separate-equal': {
+      label: '"...the separate and equal station..."',
+      items: [
+        { frame: 'historical', text: "Jefferson drew directly from Locke's Second Treatise here. 'Laws of Nature' was the Enlightenment's secular replacement for divine right — it grounded rights in reason rather than Scripture.", author: 'T. Ashworth', votes: 47, voted: false },
+        { frame: 'contest', text: "The phrase 'Nature's God' deliberately blurred the line between deist and Christian readers. Jefferson was hedging — he needed both audiences.", author: 'M. Okonkwo', votes: 31, voted: false },
+        { frame: 'contemporary', text: "This framing — rights as natural rather than state-granted — is the philosophical foundation for why constitutional rights can't simply be voted away by a majority.", author: 'R. Singh', votes: 28, voted: false }
+      ]
+    },
+    'all-men-equal': {
+      label: '"...all men are created equal..."',
+      items: [
+        { frame: 'contest', text: "Jefferson owned over 600 enslaved people across his lifetime. The irony is not incidental — it is the central contradiction of the American founding, and it was visible to contemporaries.", author: 'D. Baptiste', votes: 89, voted: false },
+        { frame: 'historical', text: "The deleted slavery clause from the draft blamed the King for the slave trade. Its removal — under pressure from Georgia and South Carolina delegates — shows the compromise was deliberate, not accidental.", author: 'C. Malone', votes: 72, voted: false },
+        { frame: 'legal', text: "Frederick Douglass argued in 1852 that this sentence was abolitionist in its plain meaning — the problem was the failure to enforce it, not the text itself. Lincoln agreed. This reading ultimately won at Appomattox.", author: 'P. Osei', votes: 65, voted: false },
+        { frame: 'contemporary', text: "'Pursuit of happiness' replaced 'property' from Locke's formulation deliberately. It opens the phrase toward broader human flourishing rather than tying rights to property ownership.", author: 'A. Reyes', votes: 54, voted: false },
+        { frame: 'personal', text: "My great-great-grandmother was enslaved in Virginia in 1776. This sentence was written two miles from where she was held. I've spent a long time deciding what to make of it.", author: 'J. Freeman', votes: 201, voted: false }
+      ]
+    },
+    'consent': {
+      label: '"...consent of the governed..."',
+      items: [
+        { frame: 'legal', text: "This four-word phrase is arguably the most consequential in American political thought. Every voting rights case, every gerrymandering challenge, every debate about democratic legitimacy flows back to it.", author: 'S. Krishnamurthy', votes: 44, voted: false },
+        { frame: 'historical', text: "Women, enslaved people, and non-property-owners were explicitly excluded from 'the governed' who consented in 1776. The phrase contained its own revolution — it just took 150 years to arrive.", author: 'B. Adler', votes: 38, voted: false }
+      ]
+    },
+    'alter-abolish': {
+      label: '"...right to alter or to abolish..."',
+      items: []
+    },
+    'long-train': {
+      label: '"...long train of abuses..."',
+      items: [
+        { frame: 'historical', text: "This passage is the founders' own theory of revolution — and it's deliberately conservative. They were not romanticizing upheaval. They were justifying it as a last resort, after sustained and systematic abuse.", author: 'W. Nakamura', votes: 33, voted: false }
+      ]
+    }
+  };
+
+  const userAnnotations = {};
+  let activeId = null;
+
+  function frameLabel(f) {
+    return { historical: 'Historical context', legal: 'Legal interpretation', contemporary: 'Contemporary echo', personal: 'Personal reflection', contest: 'Contested reading' }[f] || f;
+  }
+
+  function selectPassage(el) {
+    document.querySelectorAll('.annotatable').forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+    activeId = el.dataset.id;
+    renderPanel(activeId);
+  }
+
+  function renderPanel(id) {
+    const data = ANNOTATIONS[id];
+    const header = document.getElementById('panel-header');
+    const body = document.getElementById('panel-body');
+
+    const allItems = [...data.items, ...(userAnnotations[id] || [])];
+    const count = allItems.length;
+
+    header.innerHTML = `<strong>${data.label}</strong><span>${count} annotation${count !== 1 ? 's' : ''}${count === 0 ? ' — be the first' : ''}</span>`;
+
+    let html = '';
+
+    if (allItems.length === 0) {
+      html += `<div class="empty-state">No annotations yet on this passage.<br>Start the debate below.</div>`;
+    } else {
+      allItems.forEach((item, i) => {
+        html += `<div class="ann-item">
+          <div class="ann-frame frame-${item.frame}">${frameLabel(item.frame)}</div>
+          <div class="ann-text">${item.text}</div>
+          <div class="ann-author">— ${item.author}</div>
+          <div class="ann-votes">
+            <button class="vote-btn ${item.voted ? 'voted' : ''}" onclick="vote('${id}', ${i})">${item.voted ? '✓' : '+'} ${item.votes}</button>
+          </div>
+        </div>`;
+      });
+    }
+
+    html += `<div class="add-form">
+      <label>Your perspective</label>
+      <select id="frame-select">
+        <option value="historical">Historical context</option>
+        <option value="legal">Legal interpretation</option>
+        <option value="contemporary">Contemporary echo</option>
+        <option value="personal">Personal reflection</option>
+        <option value="contest">Contested reading</option>
+      </select>
+      <label>Your name</label>
+      <input type="text" id="author-name" placeholder="Your name (optional)" />
+      <label>Your annotation</label>
+      <textarea id="annotation-text" placeholder="What does this passage mean to you? What have you learned about it?"></textarea>
+      <button class="submit-btn" onclick="submitAnnotation()">Add to the debate</button>
+    </div>`;
+
+    body.innerHTML = html;
+  }
+
+  function vote(passageId, index) {
+    const allItems = [...ANNOTATIONS[passageId].items, ...(userAnnotations[passageId] || [])];
+    const item = allItems[index];
+    if (item.voted) { item.votes--; item.voted = false; }
+    else { item.votes++; item.voted = true; }
+    renderPanel(passageId);
+  }
+
+  function submitAnnotation() {
+    const text = document.getElementById('annotation-text').value.trim();
+    const frame = document.getElementById('frame-select').value;
+    const authorRaw = document.getElementById('author-name').value.trim();
+    const author = authorRaw || 'Anonymous';
+    if (!text || !activeId) return;
+
+    if (!userAnnotations[activeId]) userAnnotations[activeId] = [];
+    userAnnotations[activeId].push({ frame, text, author, votes: 0, voted: false });
+
+    const el = document.querySelector(`.annotatable[data-id="${activeId}"]`);
+    if (el) {
+      el.classList.add('has-annotations');
+      const allCount = ANNOTATIONS[activeId].items.length + userAnnotations[activeId].length;
+      let countEl = el.querySelector('.ann-count');
+      if (!countEl) {
+        countEl = document.createElement('span');
+        countEl.className = 'ann-count';
+        el.appendChild(countEl);
+      }
+      countEl.textContent = allCount;
+    }
+
+    renderPanel(activeId);
+  }
+</script>
+</body>
+</html>

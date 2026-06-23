@@ -29,10 +29,11 @@ interface Props {
   passageLabel: string | null
   selectedText: string | null
   documentId: string
-  onAnnotationAdded?: (passageId: string) => void
+  isContested: boolean
+  onAnnotationAdded?: (passageId: string, frame?: string) => void
 }
 
-export default function AnnotationPanel({ passageId, passageLabel, selectedText, documentId, onAnnotationAdded }: Props) {
+export default function AnnotationPanel({ passageId, passageLabel, selectedText, documentId, isContested, onAnnotationAdded }: Props) {
   const [annotations, setAnnotations] = useState<Annotation[]>([])
   const [loading, setLoading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -93,7 +94,7 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
     if (res.ok) {
       setBody('')
       setName('')
-      onAnnotationAdded?.(passageId)
+      onAnnotationAdded?.(passageId, frame)
       await fetchAnnotations(passageId)
     } else {
       const err = await res.json().catch(() => ({}))
@@ -116,7 +117,12 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
     )
   }
 
-  const sortedAnnotations = [...annotations].sort((a, b) => b.voteCount - a.voteCount)
+  // Pin contested-frame annotations to top, then sort by votes within each group
+  const sortedAnnotations = [...annotations].sort((a, b) => {
+    if (a.frame === 'contest' && b.frame !== 'contest') return -1
+    if (b.frame === 'contest' && a.frame !== 'contest') return 1
+    return b.voteCount - a.voteCount
+  })
 
   return (
     <div className="panel" id="main-panel">
@@ -130,6 +136,13 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
             : `${annotations.length} annotation${annotations.length !== 1 ? 's' : ''}${annotations.length === 0 ? ' — be the first' : ''}`}
         </span>
       </div>
+
+      {isContested && !loading && annotations.length > 0 && (
+        <div className="faceoff-banner">
+          <span className="faceoff-icon">⚔</span>
+          <span>Contested reading — annotators disagree on this passage</span>
+        </div>
+      )}
 
       <div className="ann-list">
         {loading && <div className="loading-state">Loading annotations…</div>}

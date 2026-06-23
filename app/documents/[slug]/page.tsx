@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 import { getDocument, DOCUMENTS } from '@/lib/content'
 import { supabase } from '@/lib/supabase'
 import DocumentViewer from '@/components/DocumentViewer'
-import type { AnnotationCounts } from '@/lib/types'
+import type { AnnotationCounts, ContestedPassages } from '@/lib/types'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -34,18 +34,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-async function getAnnotationCounts(documentId: string): Promise<AnnotationCounts> {
-  if (!supabase) return {}
+async function getAnnotationData(documentId: string): Promise<{ counts: AnnotationCounts; contested: ContestedPassages }> {
+  if (!supabase) return { counts: {}, contested: {} }
   const { data } = await supabase
     .from('annotations')
-    .select('passage_id')
+    .select('passage_id, frame')
     .eq('document_id', documentId)
 
   const counts: AnnotationCounts = {}
+  const contested: ContestedPassages = {}
   for (const row of data ?? []) {
     counts[row.passage_id] = (counts[row.passage_id] || 0) + 1
+    if (row.frame === 'contest') contested[row.passage_id] = true
   }
-  return counts
+  return { counts, contested }
 }
 
 export default async function DocumentPage({ params }: PageProps) {
@@ -53,7 +55,7 @@ export default async function DocumentPage({ params }: PageProps) {
   const doc = getDocument(slug)
   if (!doc) notFound()
 
-  const counts = await getAnnotationCounts(doc.id)
+  const { counts, contested } = await getAnnotationData(doc.id)
 
   return (
     <main>
@@ -78,7 +80,7 @@ export default async function DocumentPage({ params }: PageProps) {
           <div className="doc-hint">Click any underlined passage to read and add annotations</div>
         </div>
 
-        <DocumentViewer doc={doc} initialCounts={counts} />
+        <DocumentViewer doc={doc} initialCounts={counts} initialContested={contested} />
       </div>
     </main>
   )

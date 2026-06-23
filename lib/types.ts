@@ -46,6 +46,7 @@ export interface Annotation {
 }
 
 export type AnnotationCounts = Record<string, number>;
+export type ContestedPassages = Record<string, boolean>;
 
 export interface Reply {
   id: string

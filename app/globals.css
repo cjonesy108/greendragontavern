@@ -475,6 +475,24 @@ body {
 .annotatable:hover { background: var(--amber-light); }
 .annotatable.active { background: var(--amber-mid); }
 .annotatable.has-annotations { border-bottom: 1.5px solid var(--amber); }
+.annotatable.contested { border-bottom: 1.5px dashed #8B1A1A; }
+.annotatable.contested:hover { background: #fdf0f0; }
+.annotatable.contested.active { background: #f9d5d5; }
+
+@media (prefers-color-scheme: dark) {
+  .annotatable.contested:hover { background: #2d1010; }
+  .annotatable.contested.active { background: #3d1515; }
+}
+
+.contested-badge {
+  font-size: 9px;
+  margin-left: 2px;
+  vertical-align: super;
+  position: relative;
+  top: -1px;
+  opacity: 0.7;
+  cursor: pointer;
+}
 
 .ann-count {
   display: inline-flex;
@@ -492,6 +510,35 @@ body {
   position: relative;
   top: -2px;
   font-family: 'Spectral', serif;
+}
+
+/* ─── Face-off Banner ─── */
+
+.faceoff-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 1.1rem;
+  background: #fdf0f0;
+  border-bottom: 0.5px solid #e8c4c4;
+  font-size: 11px;
+  color: #791F1F;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .faceoff-banner {
+    background: #2d1010;
+    border-bottom-color: #4a1f1f;
+    color: #F09595;
+  }
+}
+
+.faceoff-icon {
+  font-size: 13px;
+  font-style: normal;
+  flex-shrink: 0;
 }
 
 /* ─── Annotation Panel ─── */
