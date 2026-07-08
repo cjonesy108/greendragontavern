@@ -3,9 +3,17 @@ import constitution from './constitution'
 import billOfRights from './bill-of-rights'
 import federalist from './federalist'
 import farewell from './farewell'
+import magnaCarta from './magna-carta'
+import virginiaDeclaration from './virginia-declaration'
+import articlesOfAssociation from './articles-of-association'
+import articlesOfConfederation from './articles-of-confederation'
 import type { DocumentData } from '../types'
 
 export const DOCUMENTS: DocumentData[] = [
+  magnaCarta,
+  virginiaDeclaration,
+  articlesOfAssociation,
+  articlesOfConfederation,
   declaration,
   constitution,
   billOfRights,
