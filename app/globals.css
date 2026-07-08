@@ -1,44 +1,108 @@
-@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap');
+/* ─── Fonts ─── */
+
+@font-face { font-family: "Masqualero"; src: url("/fonts/Masqualero-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Masqualero"; src: url("/fonts/Masqualero-Light-Italic.otf") format("opentype"); font-weight: 300; font-style: italic; font-display: swap; }
+@font-face { font-family: "Masqualero"; src: url("/fonts/Masqualero-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Masqualero"; src: url("/fonts/Masqualero-Italic.otf") format("opentype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Masqualero"; src: url("/fonts/Masqualero-DemiBold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Masqualero"; src: url("/fonts/Masqualero-DemiBold-Italic.otf") format("opentype"); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: "Masqualero"; src: url("/fonts/Masqualero-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Masqualero"; src: url("/fonts/Masqualero-Bold-Italic.otf") format("opentype"); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Masqualero"; src: url("/fonts/Masqualero-Black.otf") format("opentype"); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Masqualero"; src: url("/fonts/Masqualero-Black-Italic.otf") format("opentype"); font-weight: 900; font-style: italic; font-display: swap; }
+@font-face { font-family: "Masqualero Stencil"; src: url("/fonts/Masqualero-Stencil-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Masqualero Groove"; src: url("/fonts/Masqualero-Groove-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "EB Garamond"; src: url("/fonts/EBGaramond-Variable.ttf") format("truetype-variations"); font-weight: 400 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "EB Garamond"; src: url("/fonts/EBGaramond-Italic-Variable.ttf") format("truetype-variations"); font-weight: 400 900; font-style: italic; font-display: swap; }
+@font-face { font-family: "Open Sans"; src: url("/fonts/OpenSans-Variable.ttf") format("truetype-variations"); font-weight: 300 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Open Sans"; src: url("/fonts/OpenSans-Italic-Variable.ttf") format("truetype-variations"); font-weight: 300 800; font-style: italic; font-display: swap; }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ─── Design Tokens ─── */
+
 :root {
-  --bg: #faf7f2;
-  --bg-panel: #ffffff;
-  --bg-secondary: #f3efe8;
-  --text-primary: #1a1a18;
-  --text-secondary: #5c5a54;
-  --text-tertiary: #9a9890;
-  --border: rgba(0, 0, 0, 0.12);
-  --border-mid: rgba(0, 0, 0, 0.2);
-  --amber: #BA7517;
-  --amber-light: #faeeda;
-  --amber-mid: #fac775;
-  --amber-dark: #854F0B;
-  --green: #2a5c3f;
-  --radius-md: 6px;
-  --radius-lg: 10px;
+  /* Pine green — the Green Dragon and the Appeal to Heaven flag */
+  --pine-900: #0e2e15;
+  --pine-800: #14421c;
+  --pine-700: #1b5726;
+  --pine-600: #256e33;
+  --pine-500: #348a44;
+  --pine-300: #8dc797;
+  --pine-100: #e7f3e9;
+
+  /* Federal blues */
+  --federal-900: #0a2240;
+  --federal-800: #0a314d;
+  --federal-700: #002d74;
+  --federal-500: #205493;
+
+  /* Liberty reds */
+  --liberty-800: #6e1315;
+  --liberty-700: #981b1e;
+  --liberty-500: #d01319;
+
+  /* Paper & ink — crisp, cool, editorial */
+  --paper-100: #ffffff;
+  --paper-200: #f6f7f7;
+  --paper-300: #eaebed;
+  --paper-400: #d5d8db;
+  --ink-900: #16181b;
+  --ink-700: #33363b;
+  --ink-500: #5a5e64;
+  --ink-300: #8b8e94;
+  --ink-100: #cacccf;
+
+  /* Semantic aliases */
+  --brand: var(--pine-700);
+  --brand-dark: var(--pine-800);
+  --brand-light: var(--pine-100);
+  --brand-mid: var(--pine-300);
+
+  --bg: var(--paper-200);
+  --bg-panel: var(--paper-100);
+  --bg-secondary: var(--paper-300);
+  --text-primary: var(--ink-900);
+  --text-secondary: var(--ink-700);
+  --text-tertiary: var(--ink-500);
+  --border: var(--ink-100);
+  --border-mid: var(--ink-300);
+
+  /* Radii — "cut paper" family, nothing above 6px */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  /* Shadows */
+  --shadow-color: 22, 24, 27;
+  --shadow-sm: 0 1px 2px rgba(var(--shadow-color), 0.10);
+  --shadow-md: 0 4px 12px rgba(var(--shadow-color), 0.12);
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1a1917;
-    --bg-panel: #222220;
-    --bg-secondary: #2a2926;
-    --text-primary: #f0ede6;
-    --text-secondary: #a8a49c;
-    --text-tertiary: #6a6760;
+    --bg: var(--ink-900);
+    --bg-panel: #1e2024;
+    --bg-secondary: #26282b;
+    --text-primary: var(--paper-200);
+    --text-secondary: var(--ink-300);
+    --text-tertiary: var(--ink-500);
     --border: rgba(255, 255, 255, 0.1);
-    --border-mid: rgba(255, 255, 255, 0.18);
-    --amber-light: #2d1f06;
-    --amber-mid: #4a2e08;
+    --border-mid: rgba(255, 255, 255, 0.2);
+    --brand-light: #0e2e15;
+    --brand-mid: #256e33;
   }
 }
 
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Spectral', Georgia, serif;
+  font-family: "EB Garamond", Georgia, serif;
   background: var(--bg);
   color: var(--text-primary);
   min-height: 100vh;
@@ -48,7 +112,7 @@ body {
 /* ─── Site Header ─── */
 
 .site-header {
-  border-bottom: 0.5px solid var(--border);
+  border-bottom: 1px solid var(--border);
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
@@ -60,8 +124,10 @@ body {
 }
 
 .site-logo {
-  font-family: 'IM Fell English', Georgia, serif;
-  font-size: 20px;
+  font-family: "Masqualero", Georgia, serif;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
   text-decoration: none;
   display: flex;
@@ -69,28 +135,44 @@ body {
   gap: 12px;
 }
 
-.site-logo img {
-  flex-shrink: 0;
-}
+.site-logo img { flex-shrink: 0; }
 
 .site-logo em {
   font-size: 13px;
   color: var(--text-tertiary);
-  margin-left: 10px;
+  margin-left: 8px;
   font-style: italic;
-  font-family: 'Spectral', serif;
+  font-family: "EB Garamond", serif;
+  font-weight: 400;
 }
 
 .site-tagline {
-  font-size: 12px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
   color: var(--text-tertiary);
-  font-style: italic;
   letter-spacing: 0.04em;
 }
 
+/* ─── Site Nav ─── */
+
+.site-nav { display: flex; align-items: center; gap: 0.5rem; }
+
+.site-nav-link {
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: color var(--duration-fast), border-color var(--duration-fast);
+}
+
+.site-nav-link:hover { color: var(--brand); border-color: var(--brand); }
+
 /* ─── Landing Page ─── */
 
-/* Full-viewport hero: painting on top, text on parchment below */
 .landing-hero {
   display: flex;
   flex-direction: column;
@@ -133,32 +215,34 @@ body {
 }
 
 .landing-eyebrow {
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--brand);
   margin-bottom: 1rem;
-  font-family: 'Spectral', serif;
 }
 
 .landing-h1 {
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: "Masqualero", Georgia, serif;
+  font-weight: 700;
   font-size: 58px;
-  line-height: 1.1;
-  letter-spacing: 0.01em;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
   margin-bottom: 0;
 }
 
 .landing-ornament {
   font-size: 16px;
-  color: var(--amber);
+  color: var(--brand);
   margin: 0.9rem auto;
   letter-spacing: 0.1em;
 }
 
 .landing-sub {
-  font-family: 'Spectral', serif;
-  font-size: 16px;
+  font-family: "EB Garamond", serif;
+  font-size: 17px;
   font-style: italic;
   color: var(--text-secondary);
   line-height: 1.75;
@@ -167,33 +251,34 @@ body {
 }
 
 .landing-stat {
-  font-size: 12px;
-  color: var(--amber);
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  color: var(--brand);
   letter-spacing: 0.06em;
   margin-bottom: 1rem;
-  font-style: italic;
 }
 
 .landing-cta {
   display: inline-block;
-  font-family: 'Spectral', serif;
-  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
   color: white;
-  background: var(--amber);
+  background: var(--brand);
   border-radius: var(--radius-md);
   padding: 10px 24px;
   text-decoration: none;
   letter-spacing: 0.03em;
-  transition: background 0.15s;
+  transition: background var(--duration-fast);
 }
 
-.landing-cta:hover { background: var(--amber-dark); }
+.landing-cta:hover { background: var(--brand-dark); }
 
 .landing-painting-credit {
   margin-top: 1.5rem;
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
   color: var(--text-tertiary);
-  font-style: italic;
   letter-spacing: 0.02em;
 }
 
@@ -211,8 +296,9 @@ body {
 }
 
 .landing-canon-label {
-  font-family: 'IM Fell English', Georgia, serif;
-  font-size: 13px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-tertiary);
@@ -220,7 +306,7 @@ body {
 }
 
 .landing-canon-rule {
-  height: 0.5px;
+  height: 1px;
   background: var(--border);
   max-width: 200px;
   margin: 0 auto;
@@ -236,10 +322,10 @@ body {
   align-items: baseline;
   gap: 1.25rem;
   padding: 1.1rem 0.5rem;
-  border-bottom: 0.5px solid var(--border);
+  border-bottom: 1px solid var(--border);
   text-decoration: none;
   color: inherit;
-  transition: background 0.12s;
+  transition: background var(--duration-fast);
   border-radius: var(--radius-md);
 }
 
@@ -251,9 +337,9 @@ body {
 }
 
 .landing-doc-numeral {
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: "EB Garamond", Georgia, serif;
   font-size: 13px;
-  color: var(--amber);
+  color: var(--brand);
   width: 24px;
   flex-shrink: 0;
   text-align: right;
@@ -263,29 +349,29 @@ body {
 .landing-doc-info { flex: 1; min-width: 0; }
 
 .landing-doc-title {
-  font-family: 'IM Fell English', Georgia, serif;
-  font-size: 21px;
+  font-family: "Masqualero", Georgia, serif;
+  font-weight: 600;
+  font-size: 20px;
   line-height: 1.2;
   margin-bottom: 0.25rem;
 }
 
 .landing-doc-meta {
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
   color: var(--text-tertiary);
-  font-style: italic;
 }
 
 .landing-doc-count {
-  color: var(--amber);
-  font-style: normal;
+  color: var(--brand);
 }
 
 .landing-doc-arrow {
-  color: var(--amber);
+  color: var(--brand);
   font-size: 16px;
   flex-shrink: 0;
   opacity: 0;
-  transition: opacity 0.12s;
+  transition: opacity var(--duration-fast);
 }
 
 .landing-doc-row:hover .landing-doc-arrow { opacity: 1; }
@@ -300,14 +386,14 @@ body {
 }
 
 .landing-mission-rule {
-  height: 0.5px;
+  height: 1px;
   background: var(--border);
   margin-bottom: 2.5rem;
 }
 
 .landing-mission p {
-  font-family: 'Spectral', serif;
-  font-size: 15px;
+  font-family: "EB Garamond", serif;
+  font-size: 16px;
   font-style: italic;
   color: var(--text-tertiary);
   line-height: 1.85;
@@ -317,7 +403,7 @@ body {
 
 .doc-nav {
   background: var(--bg-panel);
-  border-bottom: 0.5px solid var(--border);
+  border-bottom: 1px solid var(--border);
   overflow-x: auto;
 }
 
@@ -331,16 +417,18 @@ body {
 
 .doc-nav-link {
   padding: 0.75rem 1.1rem;
+  font-family: "Open Sans", sans-serif;
   font-size: 13px;
+  font-weight: 500;
   color: var(--text-secondary);
   text-decoration: none;
   border-bottom: 2px solid transparent;
   white-space: nowrap;
-  transition: color 0.1s, border-color 0.1s;
+  transition: color var(--duration-fast), border-color var(--duration-fast);
 }
 
 .doc-nav-link:hover { color: var(--text-primary); }
-.doc-nav-link.active { color: var(--amber); border-bottom-color: var(--amber); }
+.doc-nav-link.active { color: var(--brand); border-bottom-color: var(--brand); }
 
 /* ─── Document Page ─── */
 
@@ -356,14 +444,16 @@ body {
 }
 
 .doc-title {
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: "Masqualero", Georgia, serif;
+  font-weight: 700;
   font-size: 28px;
   margin-bottom: 0.4rem;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
 }
 
 .doc-meta {
-  font-size: 14px;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
   color: var(--text-secondary);
   font-style: italic;
 }
@@ -371,10 +461,11 @@ body {
 .doc-hint {
   display: inline-block;
   margin-top: 0.75rem;
-  font-size: 13px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
   color: var(--text-tertiary);
-  border: 0.5px solid var(--border);
-  border-radius: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   padding: 4px 14px;
 }
 
@@ -385,83 +476,23 @@ body {
   align-items: start;
 }
 
-@media (max-width: 768px) {
-  /* Layout */
-  .body-grid { grid-template-columns: 1fr; gap: 0; }
-  .panel-col { position: static !important; margin-top: 0; }
-
-  /* Header */
-  .site-header { padding: 0.75rem 1rem; }
-  .site-tagline { display: none; }
-  .site-logo { font-size: 17px; gap: 8px; }
-  .site-logo em { display: none; }
-
-  /* Landing */
-  .landing-hero { min-height: 100svh; }
-  .landing-painting-wrap { flex: 0 0 42vh; }
-  .landing-h1 { font-size: 36px; }
-  .landing-sub { font-size: 14px; }
-  .landing-hero-content { padding: 0.5rem 1.25rem 2rem; }
-  .landing-h1 { font-size: 38px; }
-  .landing-sub { font-size: 15px; }
-  .landing-canon { padding: 1rem 1.25rem 3rem; }
-  .landing-mission { padding: 0 1.25rem 4rem; }
-  .landing-doc-title { font-size: 18px; }
-  .landing-doc-row:hover { padding-left: 0.5rem; }
-
-  /* Document nav */
-  .doc-nav-inner { padding: 0 0.5rem; }
-  .doc-nav-link { padding: 0.65rem 0.75rem; font-size: 12px; }
-
-  /* Document page */
-  .main { padding: 1.5rem 1rem 3rem; }
-  .doc-title { font-size: 22px; }
-  .doc-meta { font-size: 13px; }
-  .doc-hint { font-size: 12px; padding: 3px 12px; }
-  .doc-header { margin-bottom: 1.5rem; }
-
-  /* Text */
-  .passage { font-size: 15px; line-height: 1.85; }
-  .passage-block { margin-bottom: 1.5rem; }
-
-  /* Panel */
-  .panel {
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
-    border-top: 2px solid var(--amber);
-    scroll-margin-top: 60px;
-  }
-
-  /* Form — bigger touch targets */
-  .add-form select,
-  .add-form textarea,
-  .add-form input[type="text"] {
-    font-size: 16px; /* prevents iOS zoom */
-    padding: 9px 12px;
-  }
-  .add-form textarea { min-height: 100px; }
-  .submit-btn { padding: 11px 16px; font-size: 14px; }
-
-  /* Footer */
-  footer { font-size: 11px; padding: 1.25rem 1rem; }
-}
-
 /* ─── Document Text ─── */
 
 .section-label {
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-tertiary);
   margin-bottom: 0.6rem;
-  font-weight: 500;
 }
 
 .passage-block { margin-bottom: 2rem; }
 
 .passage {
-  font-size: 16px;
+  font-family: "EB Garamond", serif;
+  font-size: 17px;
   line-height: 1.9;
   color: var(--text-primary);
 }
@@ -469,13 +500,13 @@ body {
 .annotatable {
   cursor: pointer;
   border-radius: 2px;
-  transition: background 0.15s;
+  transition: background var(--duration-fast);
 }
 
-.annotatable:hover { background: var(--amber-light); }
-.annotatable.active { background: var(--amber-mid); }
-.annotatable.has-annotations { border-bottom: 1.5px solid var(--amber); }
-.annotatable.contested { border-bottom: 1.5px dashed #8B1A1A; }
+.annotatable:hover { background: var(--brand-light); }
+.annotatable.active { background: var(--brand-mid); }
+.annotatable.has-annotations { border-bottom: 1.5px solid var(--brand); }
+.annotatable.contested { border-bottom: 1.5px dashed var(--liberty-700); }
 .annotatable.contested:hover { background: #fdf0f0; }
 .annotatable.contested.active { background: #f9d5d5; }
 
@@ -500,16 +531,16 @@ body {
   justify-content: center;
   width: 16px;
   height: 16px;
-  background: var(--amber);
+  background: var(--brand);
   color: white;
   border-radius: 50%;
+  font-family: "Open Sans", sans-serif;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   vertical-align: super;
   margin-left: 2px;
   position: relative;
   top: -2px;
-  font-family: 'Spectral', serif;
 }
 
 /* ─── Face-off Banner ─── */
@@ -520,9 +551,10 @@ body {
   gap: 8px;
   padding: 8px 1.1rem;
   background: #fdf0f0;
-  border-bottom: 0.5px solid #e8c4c4;
-  font-size: 11px;
-  color: #791F1F;
+  border-bottom: 1px solid #e8c4c4;
+  font-family: "EB Garamond", serif;
+  font-size: 13px;
+  color: var(--liberty-800);
   font-style: italic;
   letter-spacing: 0.02em;
 }
@@ -549,27 +581,30 @@ body {
 }
 
 .panel {
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--bg-panel);
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 .panel-header {
   padding: 0.85rem 1.1rem;
-  border-bottom: 0.5px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .panel-header strong {
   display: block;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
+  font-weight: 600;
   margin-bottom: 2px;
   font-style: normal;
 }
 
 .panel-header span {
-  font-size: 12px;
+  font-family: "EB Garamond", serif;
+  font-size: 13px;
   color: var(--text-secondary);
   font-style: italic;
 }
@@ -578,8 +613,8 @@ body {
 
 .ann-item {
   padding: 0.85rem 1.1rem;
-  border-bottom: 0.5px solid var(--border);
-  transition: background 0.1s;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--duration-fast);
 }
 
 .ann-item:last-child { border-bottom: none; }
@@ -587,51 +622,54 @@ body {
 
 .ann-frame {
   display: inline-block;
+  font-family: "Open Sans", sans-serif;
   font-size: 10px;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 2px 8px;
-  border-radius: 3px;
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
   margin-bottom: 7px;
-  font-weight: 500;
 }
 
 .frame-historical { background: #E6F1FB; color: #0C447C; }
 .frame-legal { background: #EAF3DE; color: #27500A; }
-.frame-contemporary { background: #FAEEDA; color: #633806; }
+.frame-contemporary { background: #EAF3DE; color: #14421c; }
 .frame-personal { background: #EEEDFE; color: #3C3489; }
-.frame-contest { background: #FCEBEB; color: #791F1F; }
+.frame-contest { background: #FCEBEB; color: var(--liberty-800); }
 
 @media (prefers-color-scheme: dark) {
   .frame-historical { background: #042C53; color: #85B7EB; }
   .frame-legal { background: #173404; color: #97C459; }
-  .frame-contemporary { background: #412402; color: #EF9F27; }
+  .frame-contemporary { background: #0e2e15; color: #8dc797; }
   .frame-personal { background: #26215C; color: #AFA9EC; }
   .frame-contest { background: #501313; color: #F09595; }
 }
 
 .ann-quote {
-  font-family: 'IM Fell English', 'Georgia', serif;
-  font-size: 12px;
+  font-family: "EB Garamond", serif;
+  font-size: 13px;
   font-style: italic;
   color: var(--text-tertiary);
-  border-left: 2px solid var(--amber);
+  border-left: 2px solid var(--brand);
   margin: 0 0 8px 0;
   padding: 2px 0 2px 10px;
   line-height: 1.55;
 }
 
 .ann-text {
-  font-size: 13px;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
   line-height: 1.65;
   color: var(--text-primary);
   margin-bottom: 6px;
 }
 
 .ann-author {
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
   color: var(--text-tertiary);
-  font-style: italic;
+  font-style: normal;
 }
 
 .ann-author a {
@@ -642,62 +680,64 @@ body {
   cursor: pointer;
 }
 
-.ann-author a:hover { color: var(--amber); text-decoration-color: var(--amber); }
+.ann-author a:hover { color: var(--brand); text-decoration-color: var(--brand); }
 
 .featured-badge {
   display: inline-block;
+  font-family: "Open Sans", sans-serif;
   font-size: 9px;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  background: var(--amber);
+  background: var(--brand);
   color: white;
-  border-radius: 3px;
+  border-radius: var(--radius-sm);
   padding: 1px 5px;
   margin-left: 5px;
   vertical-align: middle;
   position: relative;
   top: -1px;
-  font-style: normal;
 }
 
 .ann-votes { margin-top: 7px; }
 
 .vote-btn {
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
+  font-weight: 500;
   color: var(--text-tertiary);
   background: none;
-  border: 0.5px solid var(--border);
-  border-radius: 3px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 2px 8px;
   cursor: pointer;
-  font-family: 'Spectral', serif;
-  transition: all 0.1s;
+  transition: all var(--duration-fast);
 }
 
 .vote-btn:hover { border-color: var(--border-mid); color: var(--text-secondary); }
-.vote-btn.voted { border-color: var(--amber); color: var(--amber); }
+.vote-btn.voted { border-color: var(--brand); color: var(--brand); }
 
 /* ─── Reply Threads ─── */
 
 .reply-thread {
   margin-top: 8px;
-  border-top: 0.5px solid var(--border);
+  border-top: 1px solid var(--border);
   padding-top: 6px;
 }
 
 .reply-toggle {
-  font-size: 11px;
+  font-family: "EB Garamond", serif;
+  font-size: 13px;
+  font-style: italic;
   color: var(--text-tertiary);
   background: none;
   border: none;
   cursor: pointer;
-  font-family: 'Spectral', serif;
-  font-style: italic;
   padding: 0;
-  transition: color 0.1s;
+  transition: color var(--duration-fast);
 }
 
-.reply-toggle:hover { color: var(--amber); }
+.reply-toggle:hover { color: var(--brand); }
 
 .reply-body {
   margin-top: 8px;
@@ -707,22 +747,23 @@ body {
 
 .reply-item {
   padding: 7px 0;
-  border-bottom: 0.5px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .reply-item:last-of-type { border-bottom: none; }
 
 .reply-text {
-  font-size: 12px;
+  font-family: "EB Garamond", serif;
+  font-size: 14px;
   line-height: 1.6;
   color: var(--text-primary);
   margin-bottom: 4px;
 }
 
 .reply-meta {
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
   color: var(--text-tertiary);
-  font-style: italic;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -735,27 +776,28 @@ body {
   text-decoration-color: var(--border-mid);
 }
 
-.reply-meta a:hover { color: var(--amber); }
+.reply-meta a:hover { color: var(--brand); }
 
 .reply-vote-btn {
+  font-family: "Open Sans", sans-serif;
   font-size: 10px;
+  font-weight: 500;
   color: var(--text-tertiary);
   background: none;
-  border: 0.5px solid var(--border);
-  border-radius: 3px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 1px 6px;
   cursor: pointer;
-  font-family: 'Spectral', serif;
-  font-style: normal;
-  transition: all 0.1s;
+  transition: all var(--duration-fast);
 }
 
 .reply-vote-btn:hover { border-color: var(--border-mid); color: var(--text-secondary); }
-.reply-vote-btn.voted { border-color: var(--amber); color: var(--amber); }
+.reply-vote-btn.voted { border-color: var(--brand); color: var(--brand); }
 
 .reply-loading,
 .reply-empty {
-  font-size: 12px;
+  font-family: "EB Garamond", serif;
+  font-size: 13px;
   color: var(--text-tertiary);
   font-style: italic;
   padding: 6px 0;
@@ -771,20 +813,20 @@ body {
 .reply-input,
 .reply-textarea {
   width: 100%;
-  font-family: 'Spectral', serif;
-  font-size: 12px;
+  font-family: "EB Garamond", serif;
+  font-size: 14px;
   background: var(--bg-panel);
   color: var(--text-primary);
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 6px 9px;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color var(--duration-fast);
   appearance: none;
 }
 
 .reply-input:focus,
-.reply-textarea:focus { border-color: var(--amber); }
+.reply-textarea:focus { border-color: var(--brand); }
 
 .reply-textarea {
   resize: vertical;
@@ -793,59 +835,61 @@ body {
 }
 
 .reply-submit {
-  font-family: 'Spectral', serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
+  font-weight: 500;
   padding: 5px 12px;
   cursor: pointer;
   background: var(--bg-secondary);
   color: var(--text-secondary);
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  transition: all 0.15s;
+  transition: all var(--duration-fast);
   align-self: flex-start;
 }
 
-.reply-submit:hover { border-color: var(--amber); color: var(--amber); }
+.reply-submit:hover { border-color: var(--brand); color: var(--brand); }
 .reply-submit:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* ─── Add Annotation Form ─── */
 
 .add-form {
   padding: 0.85rem 1.1rem;
-  border-top: 0.5px solid var(--border);
+  border-top: 1px solid var(--border);
   background: var(--bg-secondary);
 }
 
 .add-form label {
   display: block;
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-tertiary);
   margin-bottom: 5px;
-  font-weight: 500;
 }
 
 .add-form select,
 .add-form textarea,
 .add-form input[type="text"] {
   width: 100%;
-  font-family: 'Spectral', serif;
-  font-size: 13px;
+  font-family: "EB Garamond", serif;
+  font-size: 14px;
   background: var(--bg-panel);
   color: var(--text-primary);
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 7px 10px;
   margin-bottom: 10px;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color var(--duration-fast);
   appearance: none;
 }
 
 .add-form select:focus,
 .add-form textarea:focus,
-.add-form input[type="text"]:focus { border-color: var(--amber); }
+.add-form input[type="text"]:focus { border-color: var(--brand); }
 
 .add-form textarea {
   resize: vertical;
@@ -854,19 +898,20 @@ body {
 }
 
 .submit-btn {
-  font-family: 'Spectral', serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 13px;
-  padding: 7px 16px;
+  font-weight: 600;
+  padding: 8px 16px;
   cursor: pointer;
-  background: var(--amber);
+  background: var(--brand);
   color: white;
   border: none;
   border-radius: var(--radius-md);
-  transition: background 0.15s;
+  transition: background var(--duration-fast);
   width: 100%;
 }
 
-.submit-btn:hover { background: var(--amber-dark); }
+.submit-btn:hover { background: var(--brand-dark); }
 .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* ─── Panel States ─── */
@@ -874,7 +919,8 @@ body {
 .empty-state {
   padding: 2rem 1.1rem;
   text-align: center;
-  font-size: 13px;
+  font-family: "EB Garamond", serif;
+  font-size: 14px;
   color: var(--text-tertiary);
   font-style: italic;
   line-height: 1.7;
@@ -886,7 +932,8 @@ body {
 }
 
 .default-state p {
-  font-size: 14px;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
   color: var(--text-secondary);
   font-style: italic;
   line-height: 1.7;
@@ -895,28 +942,11 @@ body {
 .loading-state {
   padding: 2rem 1.1rem;
   text-align: center;
-  font-size: 13px;
+  font-family: "EB Garamond", serif;
+  font-size: 14px;
   color: var(--text-tertiary);
   font-style: italic;
 }
-
-/* ─── Site Nav ─── */
-
-.site-nav { display: flex; align-items: center; gap: 0.5rem; }
-
-.site-nav-link {
-  font-size: 13px;
-  font-family: 'Spectral', serif;
-  font-style: italic;
-  color: var(--text-secondary);
-  text-decoration: none;
-  padding: 4px 10px;
-  border: 0.5px solid var(--border);
-  border-radius: 20px;
-  transition: color 0.1s, border-color 0.1s;
-}
-
-.site-nav-link:hover { color: var(--amber); border-color: var(--amber); }
 
 /* ─── Tavern Floor ─── */
 
@@ -929,17 +959,20 @@ body {
 .floor-header {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 0.5px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .floor-title {
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: "Masqualero", Georgia, serif;
+  font-weight: 700;
   font-size: 28px;
+  letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
 }
 
 .floor-desc {
-  font-size: 14px;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
   color: var(--text-secondary);
   font-style: italic;
   line-height: 1.7;
@@ -955,36 +988,38 @@ body {
 .floor-sort { display: flex; gap: 4px; }
 
 .floor-sort-btn {
-  font-family: 'Spectral', serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
+  font-weight: 500;
   padding: 4px 12px;
-  border: 0.5px solid var(--border);
-  border-radius: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
   background: none;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.1s;
+  transition: all var(--duration-fast);
 }
 
 .floor-sort-btn.active,
-.floor-sort-btn:hover { border-color: var(--amber); color: var(--amber); }
+.floor-sort-btn:hover { border-color: var(--brand); color: var(--brand); }
 
 .floor-new-btn {
-  font-family: 'Spectral', serif;
-  font-size: 13px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
   padding: 6px 16px;
-  background: var(--amber);
+  background: var(--brand);
   color: white;
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background 0.15s;
+  transition: background var(--duration-fast);
 }
 
-.floor-new-btn:hover { background: var(--amber-dark); }
+.floor-new-btn:hover { background: var(--brand-dark); }
 
 .floor-new-form {
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--bg-panel);
   padding: 1.25rem;
@@ -992,40 +1027,42 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  box-shadow: var(--shadow-sm);
 }
 
 .floor-title-input {
   width: 100%;
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: "Masqualero", Georgia, serif;
+  font-weight: 600;
   font-size: 18px;
   background: var(--bg-secondary);
   color: var(--text-primary);
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 9px 12px;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color var(--duration-fast);
 }
 
-.floor-title-input:focus { border-color: var(--amber); }
+.floor-title-input:focus { border-color: var(--brand); }
 
 .floor-body-input {
   width: 100%;
-  font-family: 'Spectral', serif;
-  font-size: 14px;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
   background: var(--bg-secondary);
   color: var(--text-primary);
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 9px 12px;
   outline: none;
   resize: vertical;
   min-height: 100px;
   line-height: 1.65;
-  transition: border-color 0.15s;
+  transition: border-color var(--duration-fast);
 }
 
-.floor-body-input:focus { border-color: var(--amber); }
+.floor-body-input:focus { border-color: var(--brand); }
 
 .floor-form-footer {
   display: flex;
@@ -1035,24 +1072,24 @@ body {
 
 .floor-name-input {
   flex: 1;
-  font-family: 'Spectral', serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 13px;
   background: var(--bg-secondary);
   color: var(--text-primary);
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 7px 10px;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color var(--duration-fast);
 }
 
-.floor-name-input:focus { border-color: var(--amber); }
+.floor-name-input:focus { border-color: var(--brand); }
 
 .floor-post {
   display: flex;
   gap: 1rem;
   padding: 1rem 0;
-  border-bottom: 0.5px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .floor-post:last-child { border-bottom: none; }
@@ -1075,35 +1112,37 @@ body {
   cursor: pointer;
   line-height: 1;
   padding: 2px;
-  transition: color 0.1s;
+  transition: color var(--duration-fast);
 }
 
-.floor-vote-btn:hover { color: var(--amber); }
-.floor-vote-btn.voted { color: var(--amber); }
+.floor-vote-btn:hover { color: var(--brand); }
+.floor-vote-btn.voted { color: var(--brand); }
 
 .floor-vote-count {
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
+  font-weight: 500;
   color: var(--text-tertiary);
-  font-family: 'Spectral', serif;
 }
 
 .floor-post-body { flex: 1; min-width: 0; }
 
 .floor-post-title {
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: "Masqualero", Georgia, serif;
+  font-weight: 600;
   font-size: 18px;
   line-height: 1.3;
   margin-bottom: 4px;
   cursor: pointer;
-  transition: color 0.1s;
+  transition: color var(--duration-fast);
 }
 
-.floor-post-title:hover { color: var(--amber); }
+.floor-post-title:hover { color: var(--brand); }
 
 .floor-post-meta {
-  font-size: 12px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
   color: var(--text-tertiary);
-  font-style: italic;
   margin-bottom: 6px;
 }
 
@@ -1113,10 +1152,11 @@ body {
   text-underline-offset: 2px;
 }
 
-.floor-post-meta a:hover { color: var(--amber); }
+.floor-post-meta a:hover { color: var(--brand); }
 
 .floor-post-text {
-  font-size: 14px;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
   line-height: 1.7;
   color: var(--text-secondary);
   margin: 10px 0;
@@ -1124,18 +1164,18 @@ body {
 }
 
 .floor-reply-toggle {
-  font-size: 11px;
-  font-family: 'Spectral', serif;
+  font-family: "EB Garamond", serif;
+  font-size: 13px;
   font-style: italic;
   color: var(--text-tertiary);
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
-  transition: color 0.1s;
+  transition: color var(--duration-fast);
 }
 
-.floor-reply-toggle:hover { color: var(--amber); }
+.floor-reply-toggle:hover { color: var(--brand); }
 
 .floor-replies {
   margin-top: 10px;
@@ -1145,22 +1185,23 @@ body {
 
 .floor-reply-item {
   padding: 8px 0;
-  border-bottom: 0.5px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .floor-reply-item:last-of-type { border-bottom: none; }
 
 .floor-reply-text {
-  font-size: 13px;
+  font-family: "EB Garamond", serif;
+  font-size: 14px;
   line-height: 1.65;
   color: var(--text-primary);
   margin-bottom: 4px;
 }
 
 .floor-reply-meta {
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
   color: var(--text-tertiary);
-  font-style: italic;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1174,7 +1215,8 @@ body {
 }
 
 .floor-reply-empty {
-  font-size: 12px;
+  font-family: "EB Garamond", serif;
+  font-size: 13px;
   color: var(--text-tertiary);
   font-style: italic;
   padding: 8px 0;
@@ -1183,15 +1225,10 @@ body {
 .floor-empty {
   text-align: center;
   padding: 3rem 0;
+  font-family: "EB Garamond", serif;
   font-style: italic;
   color: var(--text-tertiary);
-  font-size: 14px;
-}
-
-@media (max-width: 768px) {
-  .floor-main { padding: 1.5rem 1.25rem 4rem; }
-  .floor-form-footer { flex-direction: column; align-items: stretch; }
-  .site-nav-link { font-size: 12px; padding: 3px 8px; }
+  font-size: 15px;
 }
 
 /* ─── Annotator Profile ─── */
@@ -1203,14 +1240,16 @@ body {
 }
 
 .profile-header {
-  border-bottom: 0.5px solid var(--border);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .profile-name {
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: "Masqualero", Georgia, serif;
+  font-weight: 700;
   font-size: 28px;
+  letter-spacing: -0.01em;
   margin-bottom: 0.3rem;
   display: flex;
   align-items: center;
@@ -1218,14 +1257,16 @@ body {
 }
 
 .profile-title {
-  font-size: 14px;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
   color: var(--text-secondary);
   font-style: italic;
   margin-bottom: 0.75rem;
 }
 
 .profile-bio {
-  font-size: 15px;
+  font-family: "EB Garamond", serif;
+  font-size: 16px;
   color: var(--text-secondary);
   line-height: 1.7;
 }
@@ -1237,31 +1278,33 @@ body {
 }
 
 .profile-stat {
-  font-size: 13px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 12px;
   color: var(--text-tertiary);
 }
 
 .profile-stat strong {
   display: block;
+  font-family: "Masqualero", serif;
+  font-weight: 700;
   font-size: 20px;
   color: var(--text-primary);
-  font-family: 'IM Fell English', serif;
-  font-weight: 400;
 }
 
 .profile-doc-group { margin-bottom: 2rem; }
 
 .profile-doc-title {
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--text-tertiary);
   margin-bottom: 0.75rem;
-  font-weight: 500;
 }
 
 .profile-ann-card {
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--bg-panel);
   padding: 0.9rem 1.1rem;
@@ -1269,14 +1312,16 @@ body {
 }
 
 .profile-ann-passage {
-  font-size: 12px;
+  font-family: "EB Garamond", serif;
+  font-size: 13px;
   color: var(--text-tertiary);
   font-style: italic;
   margin-bottom: 0.5rem;
 }
 
 .profile-ann-body {
-  font-size: 14px;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
   line-height: 1.65;
   color: var(--text-primary);
   margin-bottom: 0.5rem;
@@ -1289,6 +1334,7 @@ body {
 }
 
 .profile-ann-votes {
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
   color: var(--text-tertiary);
 }
@@ -1307,66 +1353,69 @@ body {
 }
 
 .invite-header h1 {
-  font-family: 'IM Fell English', Georgia, serif;
+  font-family: "Masqualero", Georgia, serif;
+  font-weight: 700;
   font-size: 26px;
   margin-bottom: 0.5rem;
 }
 
 .invite-header p {
-  font-size: 14px;
+  font-family: "EB Garamond", serif;
+  font-size: 15px;
   color: var(--text-secondary);
   font-style: italic;
   line-height: 1.7;
 }
 
 .invite-form {
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--bg-panel);
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
-.invite-form-inner {
-  padding: 1.5rem;
-}
+.invite-form-inner { padding: 1.5rem; }
 
 .invite-form label {
   display: block;
+  font-family: "Open Sans", sans-serif;
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-tertiary);
   margin-bottom: 5px;
-  font-weight: 500;
 }
 
 .invite-form select,
 .invite-form textarea,
 .invite-form input {
   width: 100%;
-  font-family: 'Spectral', serif;
+  font-family: "EB Garamond", serif;
   font-size: 14px;
   background: var(--bg-secondary);
   color: var(--text-primary);
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 8px 12px;
   margin-bottom: 14px;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color var(--duration-fast);
 }
 
 .invite-form select:focus,
 .invite-form textarea:focus,
-.invite-form input:focus { border-color: var(--amber); }
+.invite-form input:focus { border-color: var(--brand); }
 
 .invite-form textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
 
 .invite-name-locked {
   background: var(--bg-secondary);
-  border: 0.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 8px 12px;
+  font-family: "EB Garamond", serif;
   font-size: 14px;
   color: var(--text-primary);
   margin-bottom: 14px;
@@ -1378,7 +1427,7 @@ body {
 /* ─── Dividers ─── */
 
 .divider {
-  height: 0.5px;
+  height: 1px;
   background: var(--border);
   margin: 2rem 0;
 }
@@ -1386,12 +1435,13 @@ body {
 /* ─── Footer ─── */
 
 footer {
-  border-top: 0.5px solid var(--border);
+  border-top: 1px solid var(--border);
   padding: 1.5rem 2rem;
   text-align: center;
-  font-size: 12px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
   color: var(--text-tertiary);
-  font-style: italic;
+  letter-spacing: 0.03em;
 }
 
 /* ─── Utilities ─── */
@@ -1406,4 +1456,71 @@ footer {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ─── Mobile ─── */
+
+@media (max-width: 768px) {
+  /* Layout */
+  .body-grid { grid-template-columns: 1fr; gap: 0; }
+  .panel-col { position: static !important; margin-top: 0; }
+
+  /* Header */
+  .site-header { padding: 0.75rem 1rem; }
+  .site-tagline { display: none; }
+  .site-logo { font-size: 17px; gap: 8px; }
+  .site-logo em { display: none; }
+  .site-nav-link { font-size: 11px; padding: 4px 10px; }
+
+  /* Landing */
+  .landing-hero { min-height: 100svh; }
+  .landing-painting-wrap { flex: 0 0 42vh; }
+  .landing-h1 { font-size: 38px; }
+  .landing-sub { font-size: 15px; }
+  .landing-hero-content { padding: 0.5rem 1.25rem 2rem; }
+  .landing-canon { padding: 1rem 1.25rem 3rem; }
+  .landing-mission { padding: 0 1.25rem 4rem; }
+  .landing-doc-title { font-size: 18px; }
+  .landing-doc-row:hover { padding-left: 0.5rem; }
+
+  /* Document nav */
+  .doc-nav-inner { padding: 0 0.5rem; }
+  .doc-nav-link { padding: 0.65rem 0.75rem; font-size: 12px; }
+
+  /* Document page */
+  .main { padding: 1.5rem 1rem 3rem; }
+  .doc-title { font-size: 22px; }
+  .doc-meta { font-size: 13px; }
+  .doc-hint { font-size: 12px; padding: 3px 12px; }
+  .doc-header { margin-bottom: 1.5rem; }
+
+  /* Text */
+  .passage { font-size: 15px; line-height: 1.85; }
+  .passage-block { margin-bottom: 1.5rem; }
+
+  /* Panel */
+  .panel {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: 2px solid var(--brand);
+    scroll-margin-top: 60px;
+  }
+
+  /* Form — bigger touch targets */
+  .add-form select,
+  .add-form textarea,
+  .add-form input[type="text"] {
+    font-size: 16px;
+    padding: 9px 12px;
+  }
+  .add-form textarea { min-height: 100px; }
+  .submit-btn { padding: 11px 16px; font-size: 14px; }
+
+  /* Floor */
+  .floor-main { padding: 1.5rem 1.25rem 4rem; }
+  .floor-form-footer { flex-direction: column; align-items: stretch; }
+
+  /* Footer */
+  footer { font-size: 11px; padding: 1.25rem 1rem; }
 }
