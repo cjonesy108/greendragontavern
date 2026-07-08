@@ -948,6 +948,83 @@ body {
   font-style: italic;
 }
 
+/* ─── Tonight's Debate ─── */
+
+.tonights-debate {
+  background: var(--pine-900);
+  color: var(--paper-100);
+  padding: 3rem 2rem;
+}
+
+.tonights-debate-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.tonights-debate-eyebrow {
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pine-300);
+  margin-bottom: 1rem;
+}
+
+.tonights-debate-title {
+  font-family: "Masqualero", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+  color: var(--paper-100);
+}
+
+.tonights-debate-excerpt {
+  font-family: "EB Garamond", serif;
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--pine-200);
+  margin-bottom: 1.5rem;
+  max-width: 620px;
+}
+
+.tonights-debate-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--paper-100);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: var(--radius-md);
+  padding: 9px 18px;
+  transition: border-color var(--duration-fast), background var(--duration-fast);
+}
+
+.tonights-debate-cta:hover {
+  border-color: var(--pine-300);
+  background: rgba(255,255,255,0.06);
+}
+
+.tonights-debate-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--pine-300);
+  border-left: 1px solid rgba(255,255,255,0.2);
+  padding-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .tonights-debate { padding: 2rem 1.25rem; }
+  .tonights-debate-title { font-size: 1.5rem; }
+  .tonights-debate-excerpt { font-size: 15px; }
+}
+
 /* ─── Tavern Floor ─── */
 
 .floor-main {

@@ -76,7 +76,7 @@ function PostCard({ post, onVote }: { post: FloorPost; onVote: (id: string, hasV
   }
 
   return (
-    <div className={`floor-post${expanded ? ' expanded' : ''}`}>
+    <div id={post.id} className={`floor-post${expanded ? ' expanded' : ''}`}>
       <div className="floor-post-vote">
         <button
           className={`floor-vote-btn${post.hasVoted ? ' voted' : ''}`}

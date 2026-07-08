@@ -18,8 +18,28 @@ async function getDocumentCounts(): Promise<Record<string, number>> {
   return counts
 }
 
+interface FeaturedDebate {
+  id: string
+  title: string
+  body: string
+  replyCount: number
+}
+
+async function getFeaturedDebate(): Promise<FeaturedDebate | null> {
+  if (!supabase) return null
+  const { data } = await supabase
+    .from('floor_posts')
+    .select('id, title, body, reply_count')
+    .eq('is_featured', true)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .single()
+  if (!data) return null
+  return { id: data.id, title: data.title, body: data.body, replyCount: data.reply_count }
+}
+
 export default async function HomePage() {
-  const counts = await getDocumentCounts()
+  const [counts, featured] = await Promise.all([getDocumentCounts(), getFeaturedDebate()])
   const total = Object.values(counts).reduce((a, b) => a + b, 0)
 
   return (
@@ -67,6 +87,25 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Tonight's Debate ── */}
+      {featured && (
+        <section className="tonights-debate">
+          <div className="tonights-debate-inner">
+            <div className="tonights-debate-eyebrow">Tonight&rsquo;s Debate</div>
+            <h2 className="tonights-debate-title">{featured.title}</h2>
+            <p className="tonights-debate-excerpt">
+              {featured.body.split('\n')[0].slice(0, 180)}{featured.body.split('\n')[0].length > 180 ? '…' : ''}
+            </p>
+            <Link href={`/floor#${featured.id}`} className="tonights-debate-cta">
+              Join the argument →
+              {featured.replyCount > 0 && (
+                <span className="tonights-debate-count">{featured.replyCount} {featured.replyCount === 1 ? 'reply' : 'replies'}</span>
+              )}
+            </Link>
+          </div>
+        </section>
+      )}
 
       {/* ── Canon ── */}
       <section className="landing-canon" id="documents">
