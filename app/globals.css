@@ -578,6 +578,9 @@ body {
 .panel-col {
   position: sticky;
   top: 88px;
+  max-height: calc(100vh - 88px - 2rem);
+  display: flex;
+  flex-direction: column;
 }
 
 .panel {
@@ -586,6 +589,10 @@ body {
   background: var(--bg-panel);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
 }
 
 .panel-header {
@@ -888,10 +895,17 @@ body {
 
 /* ─── Add Annotation Form ─── */
 
+.ann-list {
+  overflow-y: auto;
+  flex: 1 1 0;
+  min-height: 0;
+}
+
 .add-form {
   padding: 0.85rem 1.1rem;
   border-top: 1px solid var(--border);
   background: var(--bg-secondary);
+  flex-shrink: 0;
 }
 
 .add-form label {
