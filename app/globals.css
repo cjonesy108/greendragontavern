@@ -620,6 +620,39 @@ body {
 .ann-item:last-child { border-bottom: none; }
 .ann-item:hover { background: var(--bg-secondary); }
 
+.ann-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 9px;
+}
+
+.ann-portrait-wrap {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+}
+
+.ann-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(100%) contrast(1.15) brightness(1.05);
+  display: block;
+}
+
+.ann-byline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 2px;
+}
+
 .ann-frame {
   display: inline-block;
   font-family: "Open Sans", sans-serif;
@@ -631,6 +664,8 @@ body {
   border-radius: var(--radius-sm);
   margin-bottom: 7px;
 }
+
+.ann-byline .ann-frame { margin-bottom: 5px; }
 
 .frame-historical { background: #E6F1FB; color: #0C447C; }
 .frame-legal { background: #EAF3DE; color: #27500A; }

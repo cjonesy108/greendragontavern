@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import type { Annotation, FrameType } from '@/lib/types'
 import { nameToSlug } from '@/lib/utils'
+import { getAnnotatorImageSlug } from '@/lib/annotators'
 import ReplyThread from './ReplyThread'
 
 const FRAME_LABELS: Record<FrameType, string> = {
@@ -153,35 +154,56 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
           </div>
         )}
 
-        {!loading && sortedAnnotations.map((ann) => (
-          <div key={ann.id} className="ann-item">
-            <div className={`ann-frame frame-${ann.frame}`}>{FRAME_LABELS[ann.frame]}</div>
-            {ann.selectedText && (
-              <blockquote className="ann-quote">&ldquo;{ann.selectedText}&rdquo;</blockquote>
-            )}
-            <div className="ann-text">{ann.body}</div>
-            <div className="ann-author">
-              —{' '}
-              {ann.annotatorName !== 'Anonymous' ? (
-                <Link href={`/annotators/${ann.annotatorSlug ?? nameToSlug(ann.annotatorName)}`}>
-                  {ann.annotatorName}
-                </Link>
-              ) : (
-                ann.annotatorName
+        {!loading && sortedAnnotations.map((ann) => {
+          const imageSlug = getAnnotatorImageSlug(ann.annotatorName)
+          return (
+            <div key={ann.id} className="ann-item">
+              <div className="ann-header">
+                {imageSlug && (
+                  <div className="ann-portrait-wrap">
+                    <img
+                      src={`/images/annotators/${imageSlug}.png`}
+                      alt={ann.annotatorName}
+                      className="ann-portrait"
+                      onError={(e) => {
+                        const el = e.currentTarget
+                        el.style.display = 'none'
+                        el.parentElement!.style.display = 'none'
+                      }}
+                    />
+                  </div>
+                )}
+                <div className="ann-byline">
+                  <div className={`ann-frame frame-${ann.frame}`}>{FRAME_LABELS[ann.frame]}</div>
+                  <div className="ann-author">
+                    —{' '}
+                    {ann.annotatorName !== 'Anonymous' ? (
+                      <Link href={`/annotators/${ann.annotatorSlug ?? nameToSlug(ann.annotatorName)}`}>
+                        {ann.annotatorName}
+                      </Link>
+                    ) : (
+                      ann.annotatorName
+                    )}
+                    {ann.isFeatured && <span className="featured-badge">Featured</span>}
+                  </div>
+                </div>
+              </div>
+              {ann.selectedText && (
+                <blockquote className="ann-quote">&ldquo;{ann.selectedText}&rdquo;</blockquote>
               )}
-              {ann.isFeatured && <span className="featured-badge">Featured</span>}
+              <div className="ann-text">{ann.body}</div>
+              <div className="ann-votes">
+                <button
+                  className={`vote-btn${ann.hasVoted ? ' voted' : ''}`}
+                  onClick={() => handleVote(ann.id, ann.hasVoted)}
+                >
+                  {ann.hasVoted ? '✓' : '+'} {ann.voteCount}
+                </button>
+              </div>
+              <ReplyThread annotationId={ann.id} initialCount={ann.replyCount} />
             </div>
-            <div className="ann-votes">
-              <button
-                className={`vote-btn${ann.hasVoted ? ' voted' : ''}`}
-                onClick={() => handleVote(ann.id, ann.hasVoted)}
-              >
-                {ann.hasVoted ? '✓' : '+'} {ann.voteCount}
-              </button>
-            </div>
-            <ReplyThread annotationId={ann.id} initialCount={ann.replyCount} />
-          </div>
-        ))}
+          )
+        })}
       </div>
 
       <div className="add-form">
