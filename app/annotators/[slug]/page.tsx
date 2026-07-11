@@ -140,7 +140,12 @@ export default async function AnnotatorPage({ params }: PageProps) {
               </Link>
             </div>
             {anns.map((ann) => (
-              <div key={ann.id} className="profile-ann-card">
+              <Link
+                key={ann.id}
+                href={`/documents/${docId}?passage=${ann.passage_id}`}
+                className="profile-ann-card"
+                style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
+              >
                 <div className="profile-ann-passage">
                   on &ldquo;{getPassageText(docId, ann.passage_id)}&rdquo;
                 </div>
@@ -151,7 +156,7 @@ export default async function AnnotatorPage({ params }: PageProps) {
                     {ann.vote_count} vote{ann.vote_count !== 1 ? 's' : ''}
                   </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )

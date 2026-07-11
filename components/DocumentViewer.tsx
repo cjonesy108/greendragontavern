@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import AnnotationPanel from './AnnotationPanel'
 import SelectionPopover from './SelectionPopover'
 import { selectionToPassageId } from '@/lib/utils'
@@ -13,12 +14,32 @@ interface Props {
 }
 
 export default function DocumentViewer({ doc, initialCounts, initialContested }: Props) {
+  const searchParams = useSearchParams()
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [selectedLabel, setSelectedLabel] = useState<string | null>(null)
   const [selectedText, setSelectedText] = useState<string | null>(null)
   const [counts, setCounts] = useState<AnnotationCounts>(initialCounts)
   const [contested, setContested] = useState<ContestedPassages>(initialContested)
   const textColRef = useRef<HTMLDivElement>(null)
+
+  // Auto-open a passage when arriving via ?passage= link (e.g. from annotator profile)
+  useEffect(() => {
+    const passageId = searchParams.get('passage')
+    if (!passageId) return
+    for (const section of doc.sections) {
+      for (const seg of section.content) {
+        if (seg.id === passageId) {
+          setSelectedId(passageId)
+          setSelectedLabel(seg.text.length > 60 ? seg.text.slice(0, 57) + '…' : seg.text)
+          setSelectedText(null)
+          setTimeout(() => {
+            document.querySelector(`[data-passage-id="${passageId}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }, 100)
+          return
+        }
+      }
+    }
+  }, [searchParams, doc])
 
   function selectPassage(id: string, text: string) {
     setSelectedId(id)
@@ -64,6 +85,7 @@ export default function DocumentViewer({ doc, initialCounts, initialContested }:
                 return (
                   <span
                     key={i}
+                    data-passage-id={seg.id}
                     className={`annotatable${count > 0 ? ' has-annotations' : ''}${isActive ? ' active' : ''}${isContested ? ' contested' : ''}`}
                     onClick={() => selectPassage(seg.id!, seg.text)}
                   >
