@@ -10,15 +10,15 @@ import articlesOfConfederation from './articles-of-confederation'
 import type { DocumentData } from '../types'
 
 export const DOCUMENTS: DocumentData[] = [
-  magnaCarta,
-  virginiaDeclaration,
-  articlesOfAssociation,
-  articlesOfConfederation,
-  declaration,
-  constitution,
-  billOfRights,
-  federalist,
-  farewell,
+  magnaCarta,              // 1215
+  articlesOfAssociation,  // Oct 1774
+  virginiaDeclaration,    // Jun 1776
+  declaration,            // Jul 1776
+  articlesOfConfederation, // 1781
+  constitution,           // 1787
+  federalist,             // 1787–88
+  billOfRights,           // 1791
+  farewell,               // 1796
 ]
 
 export function getDocument(slug: string): DocumentData | undefined {
