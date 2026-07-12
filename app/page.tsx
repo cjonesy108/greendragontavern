@@ -7,6 +7,63 @@ export const dynamic = 'force-dynamic'
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
 
+interface TrendingPassage {
+  passageId: string
+  documentId: string
+  docTitle: string
+  docSlug: string
+  passageText: string
+  score: number
+  votes: number
+  count: number
+}
+
+async function getTrending(): Promise<TrendingPassage[]> {
+  if (!supabase) return []
+  const { data } = await supabase
+    .from('annotations')
+    .select('passage_id, document_id, vote_count')
+
+  if (!data) return []
+
+  const scores: Record<string, { documentId: string; votes: number; count: number }> = {}
+  for (const ann of data) {
+    if (!scores[ann.passage_id]) {
+      scores[ann.passage_id] = { documentId: ann.document_id, votes: 0, count: 0 }
+    }
+    scores[ann.passage_id].votes += ann.vote_count || 0
+    scores[ann.passage_id].count += 1
+  }
+
+  return Object.entries(scores)
+    .map(([passageId, { documentId, votes, count }]) => {
+      const doc = DOCUMENTS.find(d => d.id === documentId)
+      let passageText = passageId
+      if (doc) {
+        for (const section of doc.sections) {
+          for (const seg of section.content) {
+            if (seg.id === passageId) {
+              passageText = seg.text
+              break
+            }
+          }
+        }
+      }
+      return {
+        passageId,
+        documentId,
+        docTitle: doc?.title ?? documentId,
+        docSlug: doc?.slug ?? documentId,
+        passageText,
+        score: votes + count * 2,
+        votes,
+        count,
+      }
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 6)
+}
+
 async function getDocumentCounts(): Promise<Record<string, number>> {
   if (!supabase) return {}
   const { data } = await supabase.from('annotations').select('document_id')
@@ -39,7 +96,7 @@ async function getFeaturedDebate(): Promise<FeaturedDebate | null> {
 }
 
 export default async function HomePage() {
-  const [counts, featured] = await Promise.all([getDocumentCounts(), getFeaturedDebate()])
+  const [counts, featured, trending] = await Promise.all([getDocumentCounts(), getFeaturedDebate(), getTrending()])
   const total = Object.values(counts).reduce((a, b) => a + b, 0)
 
   return (
@@ -103,6 +160,34 @@ export default async function HomePage() {
                 <span className="tonights-debate-count">{featured.replyCount} {featured.replyCount === 1 ? 'reply' : 'replies'}</span>
               )}
             </Link>
+          </div>
+        </section>
+      )}
+
+      {/* ── Trending ── */}
+      {trending.length > 0 && (
+        <section className="trending-section">
+          <div className="trending-header">
+            <div className="trending-label">Debated passages</div>
+            <div className="landing-canon-rule" />
+          </div>
+          <div className="trending-grid">
+            {trending.map(t => (
+              <Link
+                key={t.passageId}
+                href={`/documents/${t.docSlug}?passage=${t.passageId}`}
+                className="trending-card"
+              >
+                <div className="trending-card-doc">{t.docTitle}</div>
+                <blockquote className="trending-card-text">
+                  &ldquo;{t.passageText.length > 120 ? t.passageText.slice(0, 117) + '…' : t.passageText}&rdquo;
+                </blockquote>
+                <div className="trending-card-meta">
+                  {t.count} annotation{t.count !== 1 ? 's' : ''}
+                  {t.votes > 0 && <> &middot; {t.votes} vote{t.votes !== 1 ? 's' : ''}</>}
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
       )}

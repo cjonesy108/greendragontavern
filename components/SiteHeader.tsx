@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import SearchBar from './SearchBar'
 
 export default function SiteHeader() {
   return (
@@ -19,7 +20,10 @@ export default function SiteHeader() {
       <nav className="site-nav">
         <Link href="/floor" className="site-nav-link">The Floor</Link>
       </nav>
-      <div className="site-tagline">greendragontavern.ai</div>
+      <div className="site-header-right">
+        <SearchBar />
+        <div className="site-tagline">greendragontavern.ai</div>
+      </div>
     </header>
   )
 }
