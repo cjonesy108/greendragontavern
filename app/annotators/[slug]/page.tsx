@@ -20,9 +20,28 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   if (!supabase) return {}
-  const { data } = await supabase.from('annotators').select('name').eq('slug', slug).single()
+  const { data } = await supabase.from('annotators').select('name, title, bio').eq('slug', slug).single()
   if (!data) return {}
-  return { title: `${data.name} — The Green Dragon Tavern` }
+  const name = data.name as string
+  const role = (data.title as string | null) ?? 'Scholar'
+  const description = (data.bio as string | null)
+    ? `${name} — ${(data.bio as string).slice(0, 140)}…`
+    : `${name}, ${role}. Annotations on America's founding documents at The Green Dragon Tavern.`
+  return {
+    title: name,
+    description,
+    openGraph: {
+      title: `${name} — The Green Dragon Tavern`,
+      description,
+      url: `https://greendragontavern.ai/annotators/${slug}`,
+      type: 'profile',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${name} — The Green Dragon Tavern`,
+      description,
+    },
+  }
 }
 
 async function getAnnotatorData(slug: string) {
