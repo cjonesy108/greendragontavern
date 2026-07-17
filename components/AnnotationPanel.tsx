@@ -43,6 +43,7 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
   const [body, setBody] = useState('')
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+  const [showForm, setShowForm] = useState(false)
 
   function handleShare() {
     const url = `${window.location.origin}/documents/${documentId}?passage=${passageId}`
@@ -68,6 +69,7 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
     setAnnotations([])
     setBody('')
     setSubmitError(null)
+    setShowForm(false)
     fetchAnnotations(passageId)
   }, [passageId, fetchAnnotations])
 
@@ -216,45 +218,53 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
       </div>
 
       <div className="add-form">
-        <label htmlFor="frame-select">Frame</label>
-        <select
-          id="frame-select"
-          value={frame}
-          onChange={(e) => setFrame(e.target.value as FrameType)}
-        >
-          {Object.entries(FRAME_LABELS).map(([k, v]) => (
-            <option key={k} value={k}>{v}</option>
-          ))}
-        </select>
+        {!showForm ? (
+          <button className="add-form-toggle" onClick={() => setShowForm(true)}>
+            + Add your annotation
+          </button>
+        ) : (
+          <>
+            <label htmlFor="frame-select">Frame</label>
+            <select
+              id="frame-select"
+              value={frame}
+              onChange={(e) => setFrame(e.target.value as FrameType)}
+            >
+              {Object.entries(FRAME_LABELS).map(([k, v]) => (
+                <option key={k} value={k}>{v}</option>
+              ))}
+            </select>
 
-        <label htmlFor="author-name">Your name</label>
-        <input
-          type="text"
-          id="author-name"
-          placeholder="Your name (optional)"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+            <label htmlFor="author-name">Your name</label>
+            <input
+              type="text"
+              id="author-name"
+              placeholder="Your name (optional)"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
 
-        <label htmlFor="annotation-text">Your annotation</label>
-        <textarea
-          id="annotation-text"
-          placeholder="What does this passage mean to you? What have you learned about it?"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-        />
+            <label htmlFor="annotation-text">Your annotation</label>
+            <textarea
+              id="annotation-text"
+              placeholder="What does this passage mean to you? What have you learned about it?"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+            />
 
-        {submitError && (
-          <div style={{ fontSize: '12px', color: '#791F1F', marginBottom: '8px' }}>{submitError}</div>
+            {submitError && (
+              <div style={{ fontSize: '12px', color: '#791F1F', marginBottom: '8px' }}>{submitError}</div>
+            )}
+
+            <button
+              className="submit-btn"
+              onClick={handleSubmit}
+              disabled={submitting || !body.trim()}
+            >
+              {submitting ? 'Adding…' : 'Add to the debate'}
+            </button>
+          </>
         )}
-
-        <button
-          className="submit-btn"
-          onClick={handleSubmit}
-          disabled={submitting || !body.trim()}
-        >
-          {submitting ? 'Adding…' : 'Add to the debate'}
-        </button>
       </div>
     </div>
   )
