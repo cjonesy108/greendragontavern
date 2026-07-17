@@ -42,6 +42,15 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
   const [name, setName] = useState('')
   const [body, setBody] = useState('')
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
+
+  function handleShare() {
+    const url = `${window.location.origin}/documents/${documentId}?passage=${passageId}`
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
 
   const fetchAnnotations = useCallback(async (pid: string) => {
     setLoading(true)
@@ -133,6 +142,9 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
             ? 'Loading…'
             : `${annotations.length} annotation${annotations.length !== 1 ? 's' : ''}${annotations.length === 0 ? ' — be the first' : ''}`}
         </span>
+        <button className="share-btn" onClick={handleShare} title="Copy link to passage">
+          {copied ? 'Copied!' : 'Share ↗'}
+        </button>
       </div>
 
       {isContested && !loading && annotations.length > 0 && (

@@ -854,6 +854,10 @@ body {
 .panel-header {
   padding: 0.85rem 1.1rem;
   border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .panel-header strong {
@@ -871,6 +875,23 @@ body {
   color: var(--text-secondary);
   font-style: italic;
 }
+
+.share-btn {
+  font-family: "Open Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--brand);
+  background: none;
+  border: 1px solid var(--brand-mid);
+  border-radius: var(--radius-sm);
+  padding: 3px 9px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--duration-fast), color var(--duration-fast);
+  flex-shrink: 0;
+}
+.share-btn:hover { background: var(--brand-light); }
 
 /* ─── Annotation Items ─── */
 
