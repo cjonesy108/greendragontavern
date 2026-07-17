@@ -7,6 +7,7 @@ import magnaCarta from './magna-carta'
 import virginiaDeclaration from './virginia-declaration'
 import articlesOfAssociation from './articles-of-association'
 import articlesOfConfederation from './articles-of-confederation'
+import gettysburg from './gettysburg'
 import type { DocumentData } from '../types'
 
 export const DOCUMENTS: DocumentData[] = [
@@ -19,6 +20,7 @@ export const DOCUMENTS: DocumentData[] = [
   federalist,             // 1787–88
   billOfRights,           // 1791
   farewell,               // 1796
+  gettysburg,             // 1863
 ]
 
 export function getDocument(slug: string): DocumentData | undefined {
