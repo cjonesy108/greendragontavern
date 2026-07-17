@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { supabase } from '@/lib/supabase'
 import { getDocument } from '@/lib/content'
+import { getAnnotatorImageSlug } from '@/lib/annotators'
 import type { FrameType } from '@/lib/types'
 
 const FRAME_LABELS: Record<FrameType, string> = {
@@ -125,6 +126,19 @@ export default async function AnnotatorPage({ params }: PageProps) {
       </div>
 
       <div className="profile-header">
+        {(() => {
+          const imageSlug = getAnnotatorImageSlug(annotator.name)
+          return imageSlug ? (
+            <div className="profile-portrait-wrap">
+              <img
+                src={`/images/annotators/${imageSlug}.png`}
+                alt={annotator.name}
+                className="profile-portrait"
+              />
+            </div>
+          ) : null
+        })()}
+        <div className="profile-header-text">
         <div className="profile-name">
           {annotator.name}
           {annotator.is_featured && <span className="featured-badge">Featured</span>}
@@ -140,6 +154,7 @@ export default async function AnnotatorPage({ params }: PageProps) {
             <strong>{totalVotes}</strong>
             total votes
           </div>
+        </div>
         </div>
       </div>
 
