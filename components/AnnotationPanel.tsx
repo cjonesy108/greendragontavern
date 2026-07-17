@@ -128,9 +128,6 @@ export default function AnnotationPanel({ passageId, passageLabel, selectedText,
   return (
     <div className="panel" id="main-panel">
       <div className="panel-header">
-        <strong style={{ fontStyle: 'italic', fontFamily: 'Spectral, serif', fontWeight: 400, fontSize: '13px' }}>
-          &ldquo;{passageLabel}&rdquo;
-        </strong>
         <span>
           {loading
             ? 'Loading…'

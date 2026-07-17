@@ -727,7 +727,7 @@ body {
 
 .body-grid {
   display: grid;
-  grid-template-columns: 1fr 340px;
+  grid-template-columns: 1fr 440px;
   gap: 2.5rem;
   align-items: start;
 }
@@ -892,8 +892,8 @@ body {
 
 .ann-portrait-wrap {
   flex-shrink: 0;
-  width: 52px;
-  height: 52px;
+  width: 72px;
+  height: 72px;
   border: 1px solid var(--border);
   overflow: hidden;
   border-radius: var(--radius-sm);
